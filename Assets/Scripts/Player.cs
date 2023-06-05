@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.HID;
 
 public class Player : MonoBehaviour, ITestObjectParent
 {
@@ -9,6 +11,7 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform holder;
+    [SerializeField] private LayerMask hexagonLayerMask;
 
     private bool isWalking;
     private Vector3 lastInteractDir;
@@ -27,6 +30,24 @@ public class Player : MonoBehaviour, ITestObjectParent
     private void Start()
     {
         gameInput.PlayerInteracted += OnPlayerInteracted;
+        gameInput.PlayerClicked += OnPlayerClicked;
+    }
+
+    private void OnPlayerClicked(Vector3 vector)
+    {
+        var ray = Camera.main.ScreenPointToRay(vector);
+        Debug.Log($"ray: {ray}");
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100, false);
+
+        var maxDistance = 100f;
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, hexagonLayerMask))
+        {
+            var hexagon = raycastHit.transform.GetComponent<Hexagon>();
+            if (hexagon != null)
+            {
+                HexgaonsManager.Instance.SelectHexagon(hexagon);
+            }
+        }
     }
 
     private void OnPlayerInteracted()
