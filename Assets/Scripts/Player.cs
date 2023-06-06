@@ -42,9 +42,10 @@ public class Player : MonoBehaviour, ITestObjectParent
         var maxDistance = 100f;
         if (Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, hexagonLayerMask))
         {
-            var hexagon = raycastHit.transform.GetComponent<Hexagon>();
-            if (hexagon != null)
+            var hexagonCollider = raycastHit.transform.GetComponent<HexagonCollider>();
+            if (hexagonCollider != null)
             {
+                var hexagon = hexagonCollider.GetModel();
                 HexgaonsManager.Instance.SelectHexagon(hexagon);
             }
         }
