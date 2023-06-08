@@ -6,7 +6,7 @@ public class Hexagon : MonoBehaviour
 {
     private float selectedSize = 10f;
     private float deltaY = 0.01f;
-    [SerializeField] private Transform hexgaonModel;
+    public Transform hexgaonModel;
     [SerializeField] private Transform selectedHexagonModel;
 
     public void Select()

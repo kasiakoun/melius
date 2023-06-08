@@ -7,7 +7,9 @@ public class HexgaonsManager : MonoBehaviour
     public static HexgaonsManager Instance { get; private set; }
 
     private Hexagon[] hexagons;
-    private Hexagon selectedHexagon;
+    public Hexagon SelectedHexagon { get; private set; }
+
+    private HexgaonsManager() { }
 
     private void Awake()
     {
@@ -21,8 +23,8 @@ public class HexgaonsManager : MonoBehaviour
 
     public void SelectHexagon(Hexagon hexagon)
     {
-        selectedHexagon?.Unselect();
-        selectedHexagon = hexagon;
-        selectedHexagon.Select();
+        SelectedHexagon?.Unselect();
+        SelectedHexagon = hexagon;
+        SelectedHexagon.Select();
     }
 }

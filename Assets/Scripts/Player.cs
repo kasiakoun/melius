@@ -13,6 +13,8 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private Transform holder;
     [SerializeField] private LayerMask hexagonLayerMask;
 
+    private Vector3 destinationPoint;
+    private HexgaonsManager hexgaonsManager;
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private void Start()
     {
+        hexgaonsManager = HexgaonsManager.Instance;
         gameInput.PlayerInteracted += OnPlayerInteracted;
         gameInput.PlayerClicked += OnPlayerClicked;
     }
@@ -46,7 +49,16 @@ public class Player : MonoBehaviour, ITestObjectParent
             if (hexagonCollider != null)
             {
                 var hexagon = hexagonCollider.GetModel();
-                HexgaonsManager.Instance.SelectHexagon(hexagon);
+                if (hexagon == hexgaonsManager.SelectedHexagon)
+                {
+                    var test = hexagon.hexgaonModel.GetComponent<Renderer>();
+                    var test1 = test.bounds.center;
+                    StartWalkingToPoint(test1);
+                }
+                else
+                {
+                    hexgaonsManager.SelectHexagon(hexagon);
+                }
             }
         }
     }
@@ -61,8 +73,9 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private void Update()
     {
-        HandleMovement();
+        //HandleMovement();
         HandleInteractions();
+        HandleMovementToHexagon();
     }
 
     private void HandleInteractions()
@@ -103,6 +116,32 @@ public class Player : MonoBehaviour, ITestObjectParent
         selectedCounter = clearCounter;
         //Debug.Log(clearCounter);
         SelectedCounterChanged?.Invoke(clearCounter);
+    }
+
+    private void StartWalkingToPoint(Vector3 hexagonCenter)
+    {
+        isWalking = true;
+        destinationPoint = hexagonCenter;
+    }
+
+    private void HandleMovementToHexagon()
+    {
+        if (!isWalking || destinationPoint == Vector3.zero) return;
+
+        var maxDistanceDelta = Time.deltaTime * moveSpeed;
+        transform.position = Vector3.MoveTowards(transform.position, destinationPoint, maxDistanceDelta);
+
+        var rotateSpeed = 10f;
+        var moveDirection = (destinationPoint - transform.position).normalized;
+
+        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
+
+        var maxDistance = 0.05f;
+        if (Vector3.Distance(transform.position, destinationPoint) <= maxDistance)
+        {
+            isWalking = false;
+            destinationPoint = Vector3.zero;
+        }
     }
 
     private void HandleMovement()
