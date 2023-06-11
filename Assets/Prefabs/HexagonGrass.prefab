@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexgaonModel: {fileID: 6220778612116771283}
+  hexagonRenderer: {fileID: 5052908957489605308}
   selectedHexagonModel: {fileID: 828670741079965351}
 --- !u!1 &6307462638814167052
 GameObject:
@@ -252,6 +253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da7e9e6adb1676e4a96d9de9a4e50999, type: 3}
+--- !u!23 &5052908957489605308 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: da7e9e6adb1676e4a96d9de9a4e50999, type: 3}
+  m_PrefabInstance: {fileID: 5899183679865632312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6220778612116771283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da7e9e6adb1676e4a96d9de9a4e50999, type: 3}

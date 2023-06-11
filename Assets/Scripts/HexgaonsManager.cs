@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HexgaonsManager : MonoBehaviour
 {
+    [SerializeField] private LayerMask hexagonLayerMask;
     public static HexgaonsManager Instance { get; private set; }
 
     private Hexagon[] hexagons;
@@ -27,4 +28,23 @@ public class HexgaonsManager : MonoBehaviour
         SelectedHexagon = hexagon;
         SelectedHexagon.Select();
     }
+
+    public Hexagon FindHexagonByRay(Ray ray)
+    {
+        var maxDistance = 30f;
+        if (!Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, hexagonLayerMask))
+        {
+            return null;
+        }
+
+        var hexagonCollider = raycastHit.transform.GetComponent<HexagonCollider>();
+        if (hexagonCollider == null)
+        {
+            return null;
+        }
+
+        return hexagonCollider.GetModel();
+    }
+
+    public Hexagon AnyHexagon() => hexagons[0];
 }

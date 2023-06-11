@@ -11,14 +11,14 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform holder;
-    [SerializeField] private LayerMask hexagonLayerMask;
 
     private Vector3 destinationPoint;
-    private HexgaonsManager hexgaonsManager;
+    private HexgaonsManager hexagonsManager;
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
     private TestObject testObject;
+    private Hexagon currentHexagon;
 
     public event Action<BaseCounter> SelectedCounterChanged;
 
@@ -31,34 +31,62 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private void Start()
     {
-        hexgaonsManager = HexgaonsManager.Instance;
+        hexagonsManager = HexgaonsManager.Instance;
         gameInput.PlayerInteracted += OnPlayerInteracted;
         gameInput.PlayerClicked += OnPlayerClicked;
+        InitializeCurrentHexagon();
+    }
+
+    private void InitializeCurrentHexagon()
+    {
+        currentHexagon = GetPlayerHexagon();
+        if (currentHexagon == null)
+        {
+            currentHexagon = hexagonsManager.AnyHexagon();
+        }
+
+        InitializePlayerPosition(currentHexagon);
+    }
+
+    private Hexagon GetPlayerHexagon()
+    {
+        var position = transform.position;
+        var direction = Vector3.down;
+        var ray = new Ray(position, direction);
+
+        return hexagonsManager.FindHexagonByRay(ray);
+    }
+
+    private void InitializePlayerPosition(Hexagon hexagon)
+    {
+        var hexagonRenderer = hexagon.GetHexagonRenderer();
+        var hexagonCenter = hexagonRenderer.bounds.center;
+
+        var moveDirection = (hexagonCenter - transform.position).normalized;
+
+        transform.forward = moveDirection;
+        transform.position = hexagonCenter;
     }
 
     private void OnPlayerClicked(Vector3 vector)
     {
         var ray = Camera.main.ScreenPointToRay(vector);
-        Debug.Log($"ray: {ray}");
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100, false);
+        //Debug.Log($"ray: {ray}");
+        //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100, false);
 
-        var maxDistance = 100f;
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, hexagonLayerMask))
+        var selectedHexagon = hexagonsManager.FindHexagonByRay(ray);
+        if (selectedHexagon != null)
         {
-            var hexagonCollider = raycastHit.transform.GetComponent<HexagonCollider>();
-            if (hexagonCollider != null)
+            if (selectedHexagon == hexagonsManager.SelectedHexagon)
             {
-                var hexagon = hexagonCollider.GetModel();
-                if (hexagon == hexgaonsManager.SelectedHexagon)
-                {
-                    var test = hexagon.hexgaonModel.GetComponent<Renderer>();
-                    var test1 = test.bounds.center;
-                    StartWalkingToPoint(test1);
-                }
-                else
-                {
-                    hexgaonsManager.SelectHexagon(hexagon);
-                }
+                currentHexagon = selectedHexagon;
+                var selectedHexagonRenderer = selectedHexagon.GetHexagonRenderer();
+                var selectedHexagonCenter = selectedHexagonRenderer.bounds.center;
+                StartWalkingToPoint(selectedHexagonCenter);
+            }
+            else
+            {
+                hexagonsManager.SelectHexagon(selectedHexagon);
             }
         }
     }
@@ -74,7 +102,7 @@ public class Player : MonoBehaviour, ITestObjectParent
     private void Update()
     {
         //HandleMovement();
-        HandleInteractions();
+        //HandleInteractions();
         HandleMovementToHexagon();
     }
 
