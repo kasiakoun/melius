@@ -10,6 +10,19 @@ public class Hexagon : MonoBehaviour
     [SerializeField] private Renderer hexagonRenderer;
     [SerializeField] private Transform selectedHexagonModel;
 
+    public void OnDrawGizmosSelected()
+    {
+        var renderer = GetHexagonRenderer();
+
+        var hexagonSize = renderer.bounds.size;
+        var hexagonCenter = renderer.bounds.center;
+
+        var radius = hexagonSize.x;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(hexagonCenter, radius);
+    }
+
     public void Select()
     {
         hexgaonModel.transform.localScale = new Vector3(
