@@ -7,9 +7,10 @@ using UnityEngine;
 public class HexgaonsManager : MonoBehaviour
 {
     [SerializeField] private LayerMask hexagonLayerMask;
+    [SerializeField] private HexagonPathFinder hexagonPathFinder;
     public static HexgaonsManager Instance { get; private set; }
 
-    private Hexagon[] hexagons;
+    public Hexagon[] hexagons;
     public Hexagon SelectedHexagon { get; private set; }
 
     private HexgaonsManager() { }
@@ -31,10 +32,15 @@ public class HexgaonsManager : MonoBehaviour
         SelectedHexagon.Select();
     }
     
-    public List<Hexagon> GetHexagonsPath(Hexagon startHexagon, Hexagon endHexagon)
+    public List<Hexagon> FindPath(Hexagon startHexagon, Hexagon endHexagon)
+    {
+        return hexagonPathFinder.FindPath(startHexagon, endHexagon);
+    }
+
+    
+    public List<Hexagon> GetDirectHexagonsPath(Hexagon startHexagon, Hexagon endHexagon)
     {
         if (startHexagon == endHexagon) return null;
-        var stopwatch = Stopwatch.StartNew();
 
         var endHexagonRenderer = endHexagon.GetHexagonRenderer();
         var endHexagonCenter = endHexagonRenderer.bounds.center;
@@ -51,15 +57,12 @@ public class HexgaonsManager : MonoBehaviour
         }
         while (closestHexagon != endHexagon);
 
-        stopwatch.Stop();
-        Debug.Log($"stopwatch to find hexgons path: {stopwatch.ElapsedMilliseconds}");
-
         return hexagonsPath;
     }
 
     public Hexagon FindHexagonByRay(Ray ray)
     {
-        var maxDistance = 30f;
+        var maxDistance = 100f;
         if (!Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, hexagonLayerMask))
         {
             return null;
