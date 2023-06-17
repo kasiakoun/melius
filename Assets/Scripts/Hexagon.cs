@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class Hexagon : MonoBehaviour
 {
+    private const int SIDES_COUNT = 6;
+    private const int ONE_SIDE_IN_DEGREES = 60;
+
     private float selectedSize = 10f;
     private float deltaY = 0.01f;
     public Transform hexgaonModel;
+
     [SerializeField] private Renderer hexagonRenderer;
     [SerializeField] private Transform selectedHexagonModel;
-
-    [SerializeField] private Transform rightTopSide;
-    [SerializeField] private Transform rightSide;
-    [SerializeField] private Transform rightBottomSide;
-    [SerializeField] private Transform leftBottomSide;
-    [SerializeField] private Transform leftSide;
-    [SerializeField] private Transform leftTopSide;
     [SerializeField] private LayerMask obstacleLayer;
 
-    private List<Transform> sides => new List<Transform> { rightTopSide, rightSide, rightBottomSide, leftBottomSide, leftSide, leftTopSide };
-
-
+    public Vector3 SideBoxSize { get; private set; } = new Vector3(2, 1, 1);
     public int GCost { get; set; }
     public int HCost { get; set; }
     public int FCost { get; private set; }
@@ -29,34 +24,27 @@ public class Hexagon : MonoBehaviour
 
     public void OnDrawGizmosSelected()
     {
-        //var renderer = GetHexagonRenderer();
-
-        //var hexagonSize = renderer.bounds.size;
-        //var hexagonCenter = renderer.bounds.center;
-
-        //var radius = hexagonSize.x * 10;
-
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(hexagonCenter, radius);
-
-        foreach (var side in sides)
+        var hexagonRadius = hexagonRenderer.bounds.size.x / 2;
+        var hexagonCenter = hexagonRenderer.bounds.center;
+        for (var i = 0; i < SIDES_COUNT; i++)
         {
-            var position = side.position;
-            var size = side.lossyScale;
-            var rotation = side.rotation;
+            var angle = i * ONE_SIDE_IN_DEGREES;
 
-            var colliders = Physics.OverlapBox(position, size / 2, rotation, obstacleLayer);
-            if (colliders != null && colliders.Length > 0)
-            {
-                Gizmos.color = Color.red;
-            }
-            else
-            {
-                Gizmos.color = Color.green;
-            }
+            var angleVector = new Vector3(0, -angle, 0);
+            var rotation = Quaternion.Euler(angleVector);
 
-            Gizmos.matrix = Matrix4x4.TRS(position, rotation, size);
-            Gizmos.DrawWireCube(Vector3.zero, size);
+            var newX = hexagonCenter.x + hexagonRadius * Mathf.Cos((angle * Mathf.PI) / 180);
+            var newZ = hexagonCenter.z + hexagonRadius * Mathf.Sin((angle * Mathf.PI) / 180);
+            var nearbyVector = new Vector3(newX, 0, newZ);
+            var position = nearbyVector;
+
+            var colliders = Physics.OverlapBox(position, SideBoxSize / 2, rotation, obstacleLayer);
+            Gizmos.color = colliders != null && colliders.Length > 0
+                ? Color.red
+                : Color.green;
+
+            Gizmos.matrix = Matrix4x4.TRS(position, rotation, SideBoxSize);
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
         }
     }
 

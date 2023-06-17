@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class HexagonPathFinder : MonoBehaviour
 {
+    [SerializeField] private LayerMask obstacleLayer;
     private HexgaonsManager hexagonManager;
 
     private List<Hexagon> openHexagons;
@@ -48,6 +49,7 @@ public class HexagonPathFinder : MonoBehaviour
             foreach (var neighbourHexagon in heighbourHexagons)
             {
                 if (closedHexagons.Contains(neighbourHexagon)) continue;
+                if (!CanMoveToNearbyHexagon(currentHexagon, neighbourHexagon)) continue;
                 // todo: check if can be walk otherwise add
                 //if (!neighbourHexagon.isWalkable)
                 //{
@@ -71,6 +73,33 @@ public class HexagonPathFinder : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool CanMoveToNearbyHexagon(Hexagon currentHexagon, Hexagon nearbyHexagon)
+    {
+        var currentHexagonRenderer = currentHexagon.GetHexagonRenderer();
+        var currentHexagonCenter = currentHexagonRenderer.bounds.center;
+        var hexagonRadius = currentHexagonRenderer.bounds.size.x / 2;
+
+        var nearbyHexagonRenderer = nearbyHexagon.GetHexagonRenderer();
+        var nearbyHexagonCenter = nearbyHexagonRenderer.bounds.center;
+
+        var vector = nearbyHexagonCenter - currentHexagonCenter;
+        var size = currentHexagon.SideBoxSize;
+
+        var sign = Vector3.Cross(vector, Vector3.right).y > 0 ? 1 : -1;
+        var angle = sign * Vector3.Angle(vector, Vector3.right);
+        var angleVector = new Vector3(0, -angle, 0);
+        var rotation = Quaternion.Euler(angleVector);
+
+        var newX = currentHexagonCenter.x + hexagonRadius * Mathf.Cos((angle * Mathf.PI) / 180);
+        var newZ = currentHexagonCenter.z + hexagonRadius * Mathf.Sin((angle * Mathf.PI) / 180);
+        var nearbyVector = new Vector3(newX, 0, newZ);
+        var position = nearbyVector;
+
+        var colliders = Physics.OverlapBox(position, size / 2, rotation, obstacleLayer);
+
+        return colliders == null || colliders.Length == 0;
     }
 
     private int CalculateDistanceCost(Hexagon startHexagon, Hexagon endHexagon)
