@@ -8,6 +8,7 @@ public class HexgaonsManager : MonoBehaviour
 {
     [SerializeField] private LayerMask hexagonLayerMask;
     [SerializeField] private HexagonPathFinder hexagonPathFinder;
+    [SerializeField] private HexagonPathRenderer hexagonPathRenderer;
     public static HexgaonsManager Instance { get; private set; }
 
     public Hexagon[] hexagons;
@@ -32,6 +33,11 @@ public class HexgaonsManager : MonoBehaviour
         SelectedHexagon.Select();
     }
     
+    public void RenderHexagonPath(List<Hexagon> hexagonsPath)
+    {
+        hexagonPathRenderer.RenderPath(hexagonsPath);
+    }
+
     public List<Hexagon> FindPath(Hexagon startHexagon, Hexagon endHexagon)
     {
         return hexagonPathFinder.FindPath(startHexagon, endHexagon);
