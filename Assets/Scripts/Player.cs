@@ -12,13 +12,13 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform holder;
 
-    private Vector3 destinationPoint;
     private HexgaonsManager hexagonsManager;
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
     private TestObject testObject;
     private Hexagon currentHexagon;
+    private List<Hexagon> hexagonsPath;
 
     public event Action<BaseCounter> SelectedCounterChanged;
 
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private void OnPlayerClicked(Vector3 vector)
     {
+        if (isWalking) return;
         var ray = Camera.main.ScreenPointToRay(vector);
         //Debug.Log($"ray: {ray}");
         //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100, false);
@@ -79,14 +80,13 @@ public class Player : MonoBehaviour, ITestObjectParent
         {
             if (selectedHexagon == hexagonsManager.SelectedHexagon)
             {
-                currentHexagon = selectedHexagon;
-                var selectedHexagonRenderer = selectedHexagon.GetHexagonRenderer();
-                var selectedHexagonCenter = selectedHexagonRenderer.bounds.center;
-                StartWalkingToPoint(selectedHexagonCenter);
+                StartWalkingByHexagons(hexagonsPath);
             }
             else
             {
                 hexagonsManager.SelectHexagon(selectedHexagon);
+                hexagonsPath = hexagonsManager.FindPath(currentHexagon, selectedHexagon);
+                hexagonsManager.RenderHexagonPath(hexagonsPath);
             }
         }
     }
@@ -103,7 +103,6 @@ public class Player : MonoBehaviour, ITestObjectParent
     {
         //HandleMovement();
         //HandleInteractions();
-        HandleMovementToHexagon();
     }
 
     private void HandleInteractions()
@@ -146,29 +145,41 @@ public class Player : MonoBehaviour, ITestObjectParent
         SelectedCounterChanged?.Invoke(clearCounter);
     }
 
-    private void StartWalkingToPoint(Vector3 hexagonCenter)
+    private void StartWalkingByHexagons(List<Hexagon> hexagons)
     {
+        if (isWalking) return;
+
         isWalking = true;
-        destinationPoint = hexagonCenter;
+        StartCoroutine(StartWalking(hexagons));
     }
 
-    private void HandleMovementToHexagon()
+    private IEnumerator StartWalking(List<Hexagon> hexagons)
     {
-        if (!isWalking || destinationPoint == Vector3.zero) return;
+        foreach (var hexagon in hexagons)
+        {
+            yield return HandleMovementToHexagon(hexagon);
+            currentHexagon = hexagon;
+        }
 
-        var maxDistanceDelta = Time.deltaTime * moveSpeed;
-        transform.position = Vector3.MoveTowards(transform.position, destinationPoint, maxDistanceDelta);
+        isWalking = false;
+    }
+
+    private IEnumerator HandleMovementToHexagon(Hexagon hexagon)
+    {
+        var hexagonRenderer = hexagon.GetHexagonRenderer();
+        var hegaonCenter = hexagonRenderer.bounds.center;
 
         var rotateSpeed = 10f;
-        var moveDirection = (destinationPoint - transform.position).normalized;
-
-        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
+        var moveDirection = (hegaonCenter - transform.position).normalized;
 
         var maxDistance = 0.05f;
-        if (Vector3.Distance(transform.position, destinationPoint) <= maxDistance)
+        while (Vector3.Distance(transform.position, hegaonCenter) > maxDistance)
         {
-            isWalking = false;
-            destinationPoint = Vector3.zero;
+            var maxDistanceDelta = Time.fixedDeltaTime * moveSpeed;
+            transform.position = Vector3.MoveTowards(transform.position, hegaonCenter, maxDistanceDelta);
+
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.fixedDeltaTime * rotateSpeed);
+            yield return new WaitForFixedUpdate();
         }
     }
 
