@@ -4,17 +4,17 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 using System.Linq;
 using UnityEngine;
 
-public class HexgaonsManager : MonoBehaviour
+public class HexagonManager : MonoBehaviour
 {
     [SerializeField] private LayerMask hexagonLayerMask;
     [SerializeField] private HexagonPathFinder hexagonPathFinder;
     [SerializeField] private HexagonPathRenderer hexagonPathRenderer;
-    public static HexgaonsManager Instance { get; private set; }
+    public static HexagonManager Instance { get; private set; }
 
     public Hexagon[] hexagons;
     public Hexagon SelectedHexagon { get; private set; }
 
-    private HexgaonsManager() { }
+    private HexagonManager() { }
 
     private void Awake()
     {

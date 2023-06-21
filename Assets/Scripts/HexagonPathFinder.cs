@@ -7,14 +7,14 @@ using UnityEngine;
 public class HexagonPathFinder : MonoBehaviour
 {
     [SerializeField] private LayerMask obstacleLayer;
-    private HexgaonsManager hexagonManager;
+    private HexagonManager hexagonManager;
 
     private List<Hexagon> openHexagons;
     private List<Hexagon> closedHexagons;
 
     public void Start()
     {
-        hexagonManager = HexgaonsManager.Instance;
+        hexagonManager = HexagonManager.Instance;
     }
 
     public List<Hexagon> FindPath(Hexagon startHexagon, Hexagon endHexagon)

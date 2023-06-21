@@ -11,7 +11,7 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private Transform holder;
     [SerializeField] private CameraManager cameraManager;
 
-    private HexgaonsManager hexagonsManager;
+    private HexagonManager hexagonsManager;
     private bool isWalking;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private void Start()
     {
-        hexagonsManager = HexgaonsManager.Instance;
+        hexagonsManager = HexagonManager.Instance;
         gameInput.PlayerInteracted += OnPlayerInteracted;
         gameInput.PlayerClicked += OnPlayerClicked;
         InitializeCurrentHexagon();
