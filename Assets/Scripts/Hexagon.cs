@@ -78,7 +78,6 @@ public class Hexagon : MonoBehaviour
             hexgaonModel.transform.localPosition.z);
     }
 
-
     public void CalculateFCost()
     {
         FCost = GCost + HCost;

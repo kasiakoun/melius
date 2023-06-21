@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.HID;
 
 public class Player : MonoBehaviour, ITestObjectParent
 {
@@ -11,6 +9,7 @@ public class Player : MonoBehaviour, ITestObjectParent
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform holder;
+    [SerializeField] private CameraManager cameraManager;
 
     private HexgaonsManager hexagonsManager;
     private bool isWalking;
@@ -155,11 +154,14 @@ public class Player : MonoBehaviour, ITestObjectParent
 
     private IEnumerator StartWalking(List<Hexagon> hexagons)
     {
+        cameraManager.SwitchToPlayerCamera();
         foreach (var hexagon in hexagons)
         {
             yield return HandleMovementToHexagon(hexagon);
             currentHexagon = hexagon;
         }
+
+        cameraManager.SwitchToWorldCamera();
 
         isWalking = false;
     }
@@ -181,6 +183,8 @@ public class Player : MonoBehaviour, ITestObjectParent
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.fixedDeltaTime * rotateSpeed);
             yield return new WaitForFixedUpdate();
         }
+
+        transform.position = hegaonCenter;
     }
 
     private void HandleMovement()

@@ -32,7 +32,7 @@ public class HexgaonsManager : MonoBehaviour
         SelectedHexagon = hexagon;
         SelectedHexagon.Select();
     }
-    
+
     public void RenderHexagonPath(List<Hexagon> hexagonsPath)
     {
         hexagonPathRenderer.RenderPath(hexagonsPath);
@@ -42,7 +42,6 @@ public class HexgaonsManager : MonoBehaviour
     {
         return hexagonPathFinder.FindPath(startHexagon, endHexagon);
     }
-
     
     public List<Hexagon> GetDirectHexagonsPath(Hexagon startHexagon, Hexagon endHexagon)
     {
