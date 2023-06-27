@@ -24,7 +24,7 @@ public class GameInput : MonoBehaviour
     private void MouseMoveClicked(InputAction.CallbackContext context)
     {
         var mousePosition = Input.mousePosition;
-        Debug.Log($"Mouse clicked times: {mouseClickedTimes++} mousePosition = {mousePosition}");
+        // Debug.Log($"Mouse clicked times: {mouseClickedTimes++} mousePosition = {mousePosition}");
         PlayerClicked?.Invoke(mousePosition);
     }
 
