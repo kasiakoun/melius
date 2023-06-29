@@ -26775,7 +26775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4440555327617987917, guid: 43f6d93cbdb1bb64ab7c13db221d4146, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: HexagonPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 4440555327617987923, guid: 43f6d93cbdb1bb64ab7c13db221d4146, type: 3}
       propertyPath: gameInput
