@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonPlayer : MonoBehaviour
+public class HexagonPlayer : BasePlayer
 {
     [SerializeField] private float moveSpeed = 3.0f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private CameraManager cameraManager;
 
     private HexagonManager hexagonsManager;
-    private bool isWalking;
     private Hexagon currentHexagon;
     private List<Hexagon> hexagonsPath;
 
@@ -123,10 +122,5 @@ public class HexagonPlayer : MonoBehaviour
         }
 
         transform.position = hegaonCenter;
-    }
-
-    public bool IsWalking()
-    {
-        return isWalking;
     }
 }

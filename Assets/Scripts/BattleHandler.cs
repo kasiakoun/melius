@@ -15,6 +15,6 @@ public class BattleHandler : MonoBehaviour
 
         var destination = unitNavMeshAgent.destination;
 
-        battlePlayer.Move(destination);
+        StartCoroutine(battlePlayer.Move(destination));
     }
 }
