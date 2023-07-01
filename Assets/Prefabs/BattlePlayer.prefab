@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoppingDistance: 1.5
   navMeshAgent: {fileID: 6120516642526992216}
+  playerAnimator: {fileID: 623765980246313913}
 --- !u!195 &6120516642526992216
 NavMeshAgent:
   m_ObjectHideFlags: 0

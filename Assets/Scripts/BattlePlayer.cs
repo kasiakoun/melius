@@ -6,21 +6,36 @@ using UnityEngine.AI;
 public class BattlePlayer : BasePlayer
 {
     [SerializeField] private float stoppingDistance;
-    [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private PlayerAnimator playerAnimator;
+
+    private NavMeshAgent navMeshAgent;
+
+    private void Start()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     public IEnumerator Move(Vector3 destination)
     {
         isWalking = true;
-        Debug.Log("isWalking = true");
         navMeshAgent.SetDestination(destination);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         while (navMeshAgent.remainingDistance > stoppingDistance)
         {
             yield return new WaitForFixedUpdate();
         }
 
         navMeshAgent.isStopped = true;
-        Debug.Log("isWalking = false");
         isWalking = false;
+    }
+
+    public void TakeDamage()
+    {
+        playerAnimator.TakeDamage();
+    }
+
+    public void Attack()
+    {
+        playerAnimator.RightMeleeAttack();
     }
 }

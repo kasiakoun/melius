@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368a2eed176f3b84391d5fe7bf22315b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitAnimator: {fileID: 5760012275032444451}
+  stoppingDistance: 1.7
 --- !u!1001 &4674477204256692135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,6 +137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9573564, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7c4f716f729107c45b56e5d49ad7aee3, type: 2}
     - target: {fileID: 19870744, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3
@@ -161,10 +167,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 5.11
+  m_Radius: 6.5
   m_Height: 19.5
   m_Direction: 2
-  m_Center: {x: 0, y: 6.2, z: 1.36}
+  m_Center: {x: 0, y: 6.45, z: 1.36}
+--- !u!114 &5760012275032444451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204256806737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6acb2cb932aef478a8e0556cd9dc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 1446096437467538891}
 --- !u!4 &4674477204257031025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480470, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
