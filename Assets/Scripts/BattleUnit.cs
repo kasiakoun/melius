@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class BattleUnit : MonoBehaviour
 {
@@ -30,6 +31,18 @@ public class BattleUnit : MonoBehaviour
 
         navMeshAgent.isStopped = true;
         isWalking = false;
+    }
+
+    public IEnumerator Rotate(Transform unit)
+    {
+        var rotateSpeed = 10.0f;
+        var targetRotation = Quaternion.LookRotation(unit.position - transform.position);
+
+        while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > 1.0f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void TakeDamage()

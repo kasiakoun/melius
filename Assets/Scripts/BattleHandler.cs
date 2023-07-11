@@ -33,8 +33,9 @@ public class BattleHandler : MonoBehaviour
         destination = playerNavMeshAgent.destination;
 
         yield return battleUnit.Move(destination);
+        yield return battleUnit.Rotate(battlePlayer.transform);
         battleUnit.Attack();
-        delayBeforeTakingDamage = 1.0f;
+        delayBeforeTakingDamage = 0.9f;
         yield return new WaitForSeconds(delayBeforeTakingDamage);
         battlePlayer.TakeDamage();
     }
