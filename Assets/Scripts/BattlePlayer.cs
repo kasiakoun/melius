@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BattlePlayer : BasePlayer
+public class BattlePlayer : BasePlayer, IBattleUnit
 {
     [SerializeField] private float stoppingDistance;
     [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private float rotateSpeed = 10.0f;
 
     private NavMeshAgent navMeshAgent;
 
@@ -27,6 +28,17 @@ public class BattlePlayer : BasePlayer
 
         navMeshAgent.isStopped = true;
         isWalking = false;
+    }
+
+    public IEnumerator Rotate(Transform unit)
+    {
+        var targetRotation = Quaternion.LookRotation(unit.position - transform.position);
+
+        while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > 1.0f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void TakeDamage()

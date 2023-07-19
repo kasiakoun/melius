@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class QuickCastPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void ActionClicked(Transform par)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

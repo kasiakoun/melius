@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class BattleUnit : MonoBehaviour
+public class BattleUnit : MonoBehaviour, IBattleUnit
 {
     [SerializeField] private UnitAnimator unitAnimator;
     [SerializeField] private float stoppingDistance;
+    [SerializeField] private float rotateSpeed = 10.0f;
 
     private NavMeshAgent navMeshAgent;
     private bool isWalking;
@@ -35,7 +36,6 @@ public class BattleUnit : MonoBehaviour
 
     public IEnumerator Rotate(Transform unit)
     {
-        var rotateSpeed = 10.0f;
         var targetRotation = Quaternion.LookRotation(unit.position - transform.position);
 
         while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > 1.0f)
