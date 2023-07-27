@@ -15,28 +15,28 @@ public class BattleHandler : MonoBehaviour
 
     private IEnumerator StartHandeling(Transform player, Transform enemy)
     {
-        var battlePlayer = player.GetComponent<BattlePlayer>();
-        var battleUnit = enemy.GetComponent<BattleUnit>();
-        var unitNavMeshAgent = enemy.GetComponent<NavMeshAgent>();
-        var playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
+        //var battlePlayer = player.GetComponent<BattlePlayer>();
+        //var battleUnit = enemy.GetComponent<BattleUnit>();
+        //var unitNavMeshAgent = enemy.GetComponent<NavMeshAgent>();
+        //var playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
 
-        var destination = unitNavMeshAgent.destination;
+        //var destination = unitNavMeshAgent.destination;
 
-        yield return battlePlayer.Move(destination);
-        battlePlayer.Attack();
+        //yield return battlePlayer.Move(destination);
+        //battlePlayer.Attack();
         var delayBeforeTakingDamage = 0.6f;
         yield return new WaitForSeconds(delayBeforeTakingDamage);
-        battleUnit.TakeDamage();
+        //battleUnit.TakeDamage();
 
-        yield return new WaitForSeconds(1.0f);
+        //yield return new WaitForSeconds(1.0f);
 
-        destination = playerNavMeshAgent.destination;
+        //destination = playerNavMeshAgent.destination;
 
-        yield return battleUnit.Move(destination);
-        yield return battleUnit.Rotate(battlePlayer.transform);
-        battleUnit.Attack();
-        delayBeforeTakingDamage = 0.9f;
-        yield return new WaitForSeconds(delayBeforeTakingDamage);
-        battlePlayer.TakeDamage();
+        //yield return battleUnit.Move(destination);
+        //yield return battleUnit.Rotate(battlePlayer.transform);
+        //battleUnit.Attack();
+        //delayBeforeTakingDamage = 0.9f;
+        //yield return new WaitForSeconds(delayBeforeTakingDamage);
+        //battlePlayer.TakeDamage();
     }
 }

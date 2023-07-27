@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class UnitActionScriptableObject : ScriptableObject
+[CreateAssetMenu()]
+public class UnitScriptableObject : ScriptableObject
 {
     public Sprite icon;
 }

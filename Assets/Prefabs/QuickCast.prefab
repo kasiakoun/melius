@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8424984922634411183}
   - component: {fileID: 8424984922634411180}
   - component: {fileID: 8424984922634411181}
-  - component: {fileID: 8424984922634411182}
   - component: {fileID: 8424984922634411177}
+  - component: {fileID: 2273443749151562322}
   m_Layer: 5
   m_Name: QuickCast
   m_TagString: Untagged
@@ -126,7 +126,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuickCastPanel, Assembly-CSharp
-        m_MethodName: ActionClicked
+        m_MethodName: 
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -135,19 +135,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8424984922634411182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424984922634411091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 229d5fcfa16c8ae47b2a49ad1f77d219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+        m_CallState: 0
 --- !u!95 &8424984922634411177
 Animator:
   serializedVersion: 5
@@ -169,6 +157,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2273443749151562322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424984922634411091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9e05e51c8bcee4d8233d36c3625798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitActionScriptableObject: {fileID: 0}
+  actionImage: {fileID: 8424984922769555049}
 --- !u!1 &8424984922769555055
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8424984922769555055}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -235,7 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08d5ec2d201ece949a5e428ba3ea0e63, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

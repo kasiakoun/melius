@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonPlayer : BasePlayer
+public class HexagonPlayer : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3.0f;
     [SerializeField] private GameInput gameInput;
@@ -12,6 +12,8 @@ public class HexagonPlayer : BasePlayer
     private HexagonManager hexagonsManager;
     private Hexagon currentHexagon;
     private List<Hexagon> hexagonsPath;
+
+    private bool isWalking;
 
     public static HexagonPlayer Instance { get; private set; }
 
@@ -26,6 +28,8 @@ public class HexagonPlayer : BasePlayer
         gameInput.PlayerClicked += OnPlayerClicked;
         InitializeCurrentHexagon();
     }
+
+    public bool IsWalking() => isWalking;
 
     private void InitializeCurrentHexagon()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PickedActionsPanel : MonoBehaviour
@@ -23,7 +24,7 @@ public class PickedActionsPanel : MonoBehaviour
         for (var i = 0; i < MAX_ACTIONS_COUNT; i++)
         {
             var pickedActionTransform = Instantiate(pickedActionPrefab);
-            pickedActionTransform.parent = pickedActionsContainer;
+            pickedActionTransform.SetParent(pickedActionsContainer);
 
             var pickedActionRectTransform = pickedActionTransform.GetComponent<RectTransform>();
             pickedActionRectTransform.anchoredPosition3D = new Vector3(offsetX, 0f, 0f);
@@ -41,5 +42,14 @@ public class PickedActionsPanel : MonoBehaviour
     public void PlayActions()
     {
 
+    }
+
+    // todo: replace with common class / interface
+    public void SetupPickedAction(AttackUnitAction unitAction)
+    {
+        var pickedAction = pickedActions.FirstOrDefault(p => p.IsCleared);
+        if (pickedAction == null) return;
+
+        pickedAction.SetupAction(unitAction);
     }
 }

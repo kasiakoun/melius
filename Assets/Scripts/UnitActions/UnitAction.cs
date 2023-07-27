@@ -3,19 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAction : MonoBehaviour, IUnitAction
+public abstract class UnitAction : IUnitAction
 {
-    [SerializeField] private UnitActionScriptableObject scriptableObject;
+    protected UnitAction(UnitActionScriptableObject scriptableObject)
+    {
+        ScriptableObject = scriptableObject;
+    }
 
     #region IUnitAction Implementation
 
-    public UnitActionScriptableObject ScriptableObject => scriptableObject;
+    public UnitActionScriptableObject ScriptableObject { get; private set; }
 
-    public virtual void MakeAction()
-    {
-        Debug.Log("MakeAction is not implemented");
-        throw new NotImplementedException();
-    }
+    public abstract IEnumerator MakeAction();
 
     #endregion
 }

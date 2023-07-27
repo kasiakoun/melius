@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7932267495216910308}
   - component: {fileID: 7932267495216910311}
   - component: {fileID: 6120516642526992216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BattlePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827ac12093603ff4f8131c61b1379079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoppingDistance: 1.5
-  navMeshAgent: {fileID: 6120516642526992216}
   playerAnimator: {fileID: 623765980246313913}
+  stoppingDistance: 1.5
+  rotateSpeed: 10
+  delayBeforeHit: 0.6
 --- !u!195 &6120516642526992216
 NavMeshAgent:
   m_ObjectHideFlags: 0
