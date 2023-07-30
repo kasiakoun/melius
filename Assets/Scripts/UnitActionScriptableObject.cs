@@ -7,4 +7,5 @@ using UnityEngine;
 public class UnitActionScriptableObject : ScriptableObject
 {
     public Sprite icon;
+    public InspectableType<UnitAction> unityActionType;
 }
