@@ -532,6 +532,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 370999549}
+    - target: {fileID: 7932267495216910311, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
+      propertyPath: scriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: d1d857c607cc92344b9a9eaba3ecda35, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
 --- !u!4 &192272962 stripped
@@ -771,6 +775,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1446096437467538891, guid: 628f641b5a3a0554fa77361cf4035f80, type: 3}
+      propertyPath: scriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b8d9c0b9a0df584a83298f1b6a73a6b, type: 2}
     - target: {fileID: 2017111207141222589, guid: 628f641b5a3a0554fa77361cf4035f80, type: 3}
       propertyPath: m_Mass
       value: 25

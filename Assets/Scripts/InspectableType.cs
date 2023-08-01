@@ -6,7 +6,7 @@ public class InspectableType<T> : ISerializationCallbackReceiver
 
     [SerializeField] string qualifiedName;
 
-    private System.Type storedType;
+    public System.Type StoredType { get; private set; }
 
 #if UNITY_EDITOR
     // HACK: I wasn't able to find the base type from the SerializedProperty,
@@ -16,18 +16,18 @@ public class InspectableType<T> : ISerializationCallbackReceiver
 
     public InspectableType(System.Type typeToStore)
     {
-        storedType = typeToStore;
+        StoredType = typeToStore;
     }
 
     public override string ToString()
     {
-        if (storedType == null) return string.Empty;
-        return storedType.Name;
+        if (StoredType == null) return string.Empty;
+        return StoredType.Name;
     }
 
     public void OnBeforeSerialize()
     {
-        qualifiedName = storedType?.AssemblyQualifiedName;
+        qualifiedName = StoredType?.AssemblyQualifiedName;
 
 #if UNITY_EDITOR
         baseTypeName = typeof(T).AssemblyQualifiedName;
@@ -38,13 +38,13 @@ public class InspectableType<T> : ISerializationCallbackReceiver
     {
         if (string.IsNullOrEmpty(qualifiedName) || qualifiedName == "null")
         {
-            storedType = null;
+            StoredType = null;
             return;
         }
-        storedType = System.Type.GetType(qualifiedName);
+        StoredType = System.Type.GetType(qualifiedName);
     }
 
-    public static implicit operator System.Type(InspectableType<T> t) => t.storedType;
+    public static implicit operator System.Type(InspectableType<T> t) => t.StoredType;
 
     // TODO: Validate that t is a subtype of T?
     public static implicit operator InspectableType<T>(System.Type t) => new InspectableType<T>(t);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +8,19 @@ public class PickedAction : MonoBehaviour
     [SerializeField] private Image targetImage;
 
     public bool IsCleared { get; private set; } = true;
+    public IUnitAction UnitAction { get; private set; }
 
-    // todo: replace with common class / interface
-    public void SetupAction(AttackUnitAction unitAction)
+    public void SetupAction(IUnitAction unitAction)
     {
-        actionImage.sprite = unitAction.ScriptableObject.icon;
-        targetImage.sprite = unitAction.TargetUnit.ScriptableObject.icon;
+        // todo: replace in the future with specific actions
+        var attackUnitAction = unitAction as AttackUnitAction;
+        actionImage.sprite = attackUnitAction.ScriptableObject.icon;
+        targetImage.sprite = attackUnitAction.TargetUnit.ScriptableObject.icon;
         target.SetActive(true);
         actionImage.gameObject.SetActive(true);
 
         IsCleared = false;
+        UnitAction = unitAction;
     }
 
     public void ClearAction()
@@ -30,5 +31,6 @@ public class PickedAction : MonoBehaviour
         targetImage.sprite = null;
 
         IsCleared = true;
+        UnitAction = null;
     }
 }

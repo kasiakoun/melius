@@ -44,8 +44,7 @@ public class PickedActionsPanel : MonoBehaviour
 
     }
 
-    // todo: replace with common class / interface
-    public void SetupPickedAction(AttackUnitAction unitAction)
+    public void SetupPickedAction(IUnitAction unitAction)
     {
         var pickedAction = pickedActions.FirstOrDefault(p => p.IsCleared);
         if (pickedAction == null) return;

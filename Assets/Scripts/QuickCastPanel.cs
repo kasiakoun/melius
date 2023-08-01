@@ -10,6 +10,8 @@ public class QuickCastPanel : MonoBehaviour
     [SerializeField] private BattlePlayer player;
     [SerializeField] private PickedActionsPanel pickedActionsPanel;
 
+    private readonly IUnitActionFactory unitActionFactory = UnitActionFactory.Instance;
+
     private readonly List<QuickCast> quickCasts = new List<QuickCast>();
 
     private UnitActionScriptableObject lastClickedUnitActionScriptableObject;
@@ -57,8 +59,14 @@ public class QuickCastPanel : MonoBehaviour
 
     private void OnUnitsPicked(PickedUnitsEventArgs obj)
     {
-        // todo: implement mechanism / factory to create unit actions
-        var unitAction = new AttackUnitAction(lastClickedUnitActionScriptableObject, player, obj.PickedUnits[0]);
+        //var unitAction = new AttackUnitAction(lastClickedUnitActionScriptableObject, player, obj.PickedUnits[0]);
+        var unitActionParameters = new UnitActionParameters
+        {
+            scriptableObject = lastClickedUnitActionScriptableObject,
+            owner = player,
+            target = obj.PickedUnits[0],
+        };
+        var unitAction = unitActionFactory.CreateUnitAction(unitActionParameters);
 
         pickedActionsPanel.SetupPickedAction(unitAction);
     }
