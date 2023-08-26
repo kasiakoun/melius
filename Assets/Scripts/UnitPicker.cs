@@ -24,10 +24,10 @@ public class UnitPicker : MonoBehaviour
         var battleUnits = FindObjectsByType<BattleUnit>(FindObjectsSortMode.None);
         this.battleUnits = battleUnits.Cast<IBattleUnit>().ToList();
 
-        gameInput.PlayerClicked += OnPlayerClicked;
+        gameInput.MouseLeftClicked += OnMouseLeftClicked;
     }
 
-    private void OnPlayerClicked(Vector3 vector)
+    private void OnMouseLeftClicked(Vector3 vector)
     {
         if (!isPicking) return;
 

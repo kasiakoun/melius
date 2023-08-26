@@ -25,7 +25,7 @@ public class HexagonPlayer : MonoBehaviour
     private void Start()
     {
         hexagonsManager = HexagonManager.Instance;
-        gameInput.PlayerClicked += OnPlayerClicked;
+        gameInput.MouseLeftClicked += OnMouseLeftClicked;
         InitializeCurrentHexagon();
     }
 
@@ -62,7 +62,7 @@ public class HexagonPlayer : MonoBehaviour
         transform.position = hexagonCenter;
     }
 
-    private void OnPlayerClicked(Vector3 vector)
+    private void OnMouseLeftClicked(Vector3 vector)
     {
         if (isWalking) return;
         var ray = Camera.main.ScreenPointToRay(vector);

@@ -10,7 +10,8 @@ public class GameInput : MonoBehaviour
     private int mouseClickedTimes;
 
     public event Action PlayerInteracted;
-    public event Action<Vector3> PlayerClicked;
+    public event Action<Vector3> MouseLeftClicked;
+    public event Action<Vector2> MouseMoved;
 
     private void Awake()
     {
@@ -18,14 +19,28 @@ public class GameInput : MonoBehaviour
         playerInputActions.Enable();
 
         playerInputActions.Player.Interact.performed += InteractOnPerformed;
-        playerInputActions.Player.MouseMove.performed += MouseMoveClicked;
+        playerInputActions.Player.MouseLeft.performed += MouseLeftPerformed;
+
+        playerInputActions.Player.MouseMove.performed += MouseMovePerformed;
+        playerInputActions.Player.MouseMove.canceled += MouseMoveCanceled;
     }
 
-    private void MouseMoveClicked(InputAction.CallbackContext context)
+    private void MouseMoveCanceled(InputAction.CallbackContext obj)
+    {
+        var newPosition = Vector2.zero;
+        MouseMoved?.Invoke(newPosition);
+    }
+
+    private void MouseMovePerformed(InputAction.CallbackContext context)
+    {
+        var newPosition = context.ReadValue<Vector2>();
+        MouseMoved?.Invoke(newPosition);
+    }
+
+    private void MouseLeftPerformed(InputAction.CallbackContext context)
     {
         var mousePosition = Input.mousePosition;
-        // Debug.Log($"Mouse clicked times: {mouseClickedTimes++} mousePosition = {mousePosition}");
-        PlayerClicked?.Invoke(mousePosition);
+        MouseLeftClicked?.Invoke(mousePosition);
     }
 
     private void InteractOnPerformed(InputAction.CallbackContext obj)
