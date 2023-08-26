@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CameraController : MonoBehaviour
@@ -21,6 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void OnMouseMoved(Vector2 mouseDelta)
     {
+        if (!Mouse.current.leftButton.isPressed) return;
         // Update the camera's vertical and horizontal rotation
         currentRotationX -= mouseDelta.y * sensitivity;
         currentRotationX = Mathf.Clamp(currentRotationX, minYAngle, maxYAngle);
