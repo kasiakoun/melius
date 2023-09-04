@@ -174,9 +174,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPicker: {fileID: 924474784}
+  positionPicker: {fileID: 1146124696}
   quickCastPrefab: {fileID: 8424984922634411090, guid: f4383425ffb8e2b4f86986b2f4cae723, type: 3}
   player: {fileID: 192272963}
   pickedActionsPanel: {fileID: 1001784107}
+  moveUnitActionScriptableObject: {fileID: 11400000, guid: 39163fc030600a2479447f810ce34c0d, type: 2}
+  attackUnitActionScriptableObject: {fileID: 11400000, guid: 8b6145e815043894c940c5222be7ddb4, type: 2}
 --- !u!1 &165196705
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +405,7 @@ GameObject:
   - component: {fileID: 173920192}
   - component: {fileID: 173920191}
   - component: {fileID: 173920190}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,11 +541,6 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d1d857c607cc92344b9a9eaba3ecda35, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
---- !u!4 &192272962 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7932267495216910308, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
-  m_PrefabInstance: {fileID: 192272961}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &192272963 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7932267495216910311, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
@@ -599,8 +597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ece0ca69e88b5d4a90e14a23faca634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 192272962}
-  enemy: {fileID: 1966750291}
 --- !u!4 &488192620
 Transform:
   m_ObjectHideFlags: 0
@@ -1491,6 +1487,7 @@ MonoBehaviour:
   pickedActionPrefab: {fileID: 901823649966900398, guid: 952898d55851e19448af94c60bd885f0, type: 3}
   pickedActionsContainer: {fileID: 2064834524}
   playButton: {fileID: 1961211270}
+  battleHandler: {fileID: 488192619}
 --- !u!1 &1032060190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +1590,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1146124695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146124697}
+  - component: {fileID: 1146124696}
+  m_Layer: 0
+  m_Name: PositionPicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1146124696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146124695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f38c1821f61b94393d79eae60c90ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameInput: {fileID: 165196706}
+  terrain: {fileID: 173920191}
+  terrainLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+--- !u!4 &1146124697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146124695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780319801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,9 +1840,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 726370321}
-        m_TargetAssemblyTypeName: BattleUI, Assembly-CSharp
-        m_MethodName: AttackClicked
+      - m_Target: {fileID: 1001784107}
+        m_TargetAssemblyTypeName: PickedActionsPanel, Assembly-CSharp
+        m_MethodName: PlayActions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1844,11 +1890,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961211269}
   m_CullTransparentMesh: 1
---- !u!4 &1966750291 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4674477204356360669, guid: 628f641b5a3a0554fa77361cf4035f80, type: 3}
-  m_PrefabInstance: {fileID: 676318934}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2064834523
 GameObject:
   m_ObjectHideFlags: 0

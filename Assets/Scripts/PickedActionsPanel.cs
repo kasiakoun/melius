@@ -10,6 +10,7 @@ public class PickedActionsPanel : MonoBehaviour
     [SerializeField] private Transform pickedActionPrefab;
     [SerializeField] private Transform pickedActionsContainer;
     [SerializeField] private Transform playButton;
+    [SerializeField] private BattleHandler battleHandler;
 
     private readonly List<PickedAction> pickedActions = new List<PickedAction>();
 
@@ -41,7 +42,11 @@ public class PickedActionsPanel : MonoBehaviour
 
     public void PlayActions()
     {
-
+        var unitActions = pickedActions
+            .Where(p => p.UnitAction != null)
+            .Select(p => p.UnitAction)
+            .ToList();
+        battleHandler.Handle(unitActions);
     }
 
     public void SetupPickedAction(IUnitAction unitAction)

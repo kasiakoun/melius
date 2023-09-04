@@ -8,7 +8,7 @@ public class BattleUI : MonoBehaviour
 
     public void AttackClicked()
     {
-        battleHandler.Handle();
+        //battleHandler.Handle();
         Debug.Log("AttackClicked");
     }
 }

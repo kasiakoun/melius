@@ -1,42 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BattleHandler : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform enemy;
-
-    public void Handle()
+    public void Handle(List<IUnitAction> unitActions)
     {
-        StartCoroutine(StartHandeling(player, enemy));
+        StartCoroutine(StartHandling(unitActions));
     }
 
-    private IEnumerator StartHandeling(Transform player, Transform enemy)
+    private IEnumerator StartHandling(List<IUnitAction> unitActions)
     {
-        //var battlePlayer = player.GetComponent<BattlePlayer>();
-        //var battleUnit = enemy.GetComponent<BattleUnit>();
-        //var unitNavMeshAgent = enemy.GetComponent<NavMeshAgent>();
-        //var playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
-
-        //var destination = unitNavMeshAgent.destination;
-
-        //yield return battlePlayer.Move(destination);
-        //battlePlayer.Attack();
-        var delayBeforeTakingDamage = 0.6f;
-        yield return new WaitForSeconds(delayBeforeTakingDamage);
-        //battleUnit.TakeDamage();
-
-        //yield return new WaitForSeconds(1.0f);
-
-        //destination = playerNavMeshAgent.destination;
-
-        //yield return battleUnit.Move(destination);
-        //yield return battleUnit.Rotate(battlePlayer.transform);
-        //battleUnit.Attack();
-        //delayBeforeTakingDamage = 0.9f;
-        //yield return new WaitForSeconds(delayBeforeTakingDamage);
-        //battlePlayer.TakeDamage();
+        foreach (var unitAction in unitActions)
+        {
+            yield return unitAction.MakeAction();
+        }
     }
 }

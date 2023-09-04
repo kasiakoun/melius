@@ -5,10 +5,17 @@ public class QuickCastPanel : MonoBehaviour
 {
     private const int MAX_QUICK_CASTS = 9;
 
+    // todo: replace unitPicker / positionPicker
     [SerializeField] private UnitPicker unitPicker;
+    [SerializeField] private PositionPicker positionPicker;
+
     [SerializeField] private Transform quickCastPrefab;
     [SerializeField] private BattlePlayer player;
     [SerializeField] private PickedActionsPanel pickedActionsPanel;
+
+    // todo: temp field
+    [SerializeField] private UnitActionScriptableObject moveUnitActionScriptableObject;
+    [SerializeField] private UnitActionScriptableObject attackUnitActionScriptableObject;
 
     private readonly IUnitActionFactory unitActionFactory = UnitActionFactory.Instance;
 
@@ -22,6 +29,7 @@ public class QuickCastPanel : MonoBehaviour
         SetupQuickCasts();
 
         unitPicker.UnitsPicked += OnUnitsPicked;
+        positionPicker.PositionPicked += OnPositionPicked;
     }
 
     private void ClearQuickCastPanel()
@@ -49,23 +57,50 @@ public class QuickCastPanel : MonoBehaviour
             quickCast.ButtonClicked += OnQuickCastClicked;
             quickCasts.Add(quickCast);
         }
+
+        // todo: temp init
+        quickCasts[0].UnitActionScriptableObject = moveUnitActionScriptableObject;
+        quickCasts[1].UnitActionScriptableObject = attackUnitActionScriptableObject;
     }
 
     private void OnQuickCastClicked(UnitActionScriptableObject scriptableObject)
     {
+        // todo: replace with something universal(unitPicker / positionPicker)
         lastClickedUnitActionScriptableObject = scriptableObject;
-        unitPicker.StartPicking();
+        var unitActionType = scriptableObject.unityActionType.StoredType;
+        if (unitActionType == typeof(AttackUnitAction))
+        {
+            unitPicker.StartPicking();
+        }
+        else if (unitActionType == typeof(MoveUnitAction))
+        {
+            positionPicker.StartPicking();
+        }
+    }
+
+    private void OnPositionPicked(Vector3 obj)
+    {
+        var unitActionParameters = new UnitActionParameters(
+            lastClickedUnitActionScriptableObject,
+            new List<object>
+            {
+                player,
+                obj,
+            });
+        var unitAction = unitActionFactory.CreateUnitAction(unitActionParameters);
+
+        pickedActionsPanel.SetupPickedAction(unitAction);
     }
 
     private void OnUnitsPicked(PickedUnitsEventArgs obj)
     {
-        //var unitAction = new AttackUnitAction(lastClickedUnitActionScriptableObject, player, obj.PickedUnits[0]);
-        var unitActionParameters = new UnitActionParameters
-        {
-            scriptableObject = lastClickedUnitActionScriptableObject,
-            owner = player,
-            target = obj.PickedUnits[0],
-        };
+        var unitActionParameters = new UnitActionParameters(
+            lastClickedUnitActionScriptableObject,
+            new List<object>
+            {
+                player,
+                obj.PickedUnits[0],
+            });
         var unitAction = unitActionFactory.CreateUnitAction(unitActionParameters);
 
         pickedActionsPanel.SetupPickedAction(unitAction);

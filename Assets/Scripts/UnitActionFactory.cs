@@ -18,10 +18,8 @@ public class UnitActionFactory : IUnitActionFactory
 
     public IUnitAction CreateUnitAction(UnitActionParameters unitActionParameters)
     {
-        var scriptableObject = unitActionParameters.scriptableObject;
-        var type = scriptableObject.unityActionType.StoredType;
-
-        var parameters = new object[] { scriptableObject, unitActionParameters.owner, unitActionParameters.target };
+        var type = unitActionParameters.TypeAction;
+        var parameters = unitActionParameters.Parameters.ToArray();
 
         return Activator.CreateInstance(type, parameters) as IUnitAction;
     }

@@ -33,6 +33,7 @@ public class BattlePlayer : MonoBehaviour, IBattleUnit
     {
         isWalking = true;
         navMeshAgent.SetDestination(destination);
+        Debug.Log($"player destination: {destination}");
         yield return new WaitForSeconds(0.01f);
         while (navMeshAgent.remainingDistance > stoppingDistance)
         {

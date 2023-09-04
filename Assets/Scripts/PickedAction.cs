@@ -13,12 +13,19 @@ public class PickedAction : MonoBehaviour
     public void SetupAction(IUnitAction unitAction)
     {
         // todo: replace in the future with specific actions
-        var attackUnitAction = unitAction as AttackUnitAction;
-        actionImage.sprite = attackUnitAction.ScriptableObject.icon;
-        targetImage.sprite = attackUnitAction.TargetUnit.ScriptableObject.icon;
-        target.SetActive(true);
-        actionImage.gameObject.SetActive(true);
+        actionImage.sprite = unitAction.ScriptableObject.icon;
+        if (unitAction is AttackUnitAction)
+        {
+            var attackUnitAction = unitAction as AttackUnitAction;
+            targetImage.sprite = attackUnitAction.TargetUnit.ScriptableObject.icon;
+            target.SetActive(true);
+        }
+        else if (unitAction is MoveUnitAction)
+        {
 
+        }
+
+        actionImage.gameObject.SetActive(true);
         IsCleared = false;
         UnitAction = unitAction;
     }
