@@ -56,4 +56,12 @@ public class PickedActionsPanel : MonoBehaviour
 
         pickedAction.SetupAction(unitAction);
     }
+
+    public void ClearPanel()
+    {
+        foreach (var pickedAction in pickedActions)
+        {
+            pickedAction.ClearAction();
+        }
+    }
 }

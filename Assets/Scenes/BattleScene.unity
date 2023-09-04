@@ -597,6 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ece0ca69e88b5d4a90e14a23faca634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedActionsPanel: {fileID: 1001784107}
 --- !u!4 &488192620
 Transform:
   m_ObjectHideFlags: 0

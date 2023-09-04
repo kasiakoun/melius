@@ -32,10 +32,13 @@ public class BattlePlayer : MonoBehaviour, IBattleUnit
     public IEnumerator Move(Vector3 destination)
     {
         isWalking = true;
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(destination);
-        Debug.Log($"player destination: {destination}");
         yield return new WaitForSeconds(0.01f);
         while (navMeshAgent.remainingDistance > stoppingDistance)
+        // todo: in the future we have to reload Move method with
+        // todo: distance paramter to have more accurate position
+        //while (navMeshAgent.hasPath)
         {
             yield return new WaitForFixedUpdate();
         }

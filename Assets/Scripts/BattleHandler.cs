@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleHandler : MonoBehaviour
 {
+    [SerializeField] private PickedActionsPanel pickedActionsPanel;
+
     public void Handle(List<IUnitAction> unitActions)
     {
         StartCoroutine(StartHandling(unitActions));
@@ -15,5 +17,7 @@ public class BattleHandler : MonoBehaviour
         {
             yield return unitAction.MakeAction();
         }
+
+        pickedActionsPanel.ClearPanel();
     }
 }
