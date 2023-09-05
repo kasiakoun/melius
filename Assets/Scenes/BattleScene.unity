@@ -539,6 +539,10 @@ PrefabInstance:
       propertyPath: scriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: d1d857c607cc92344b9a9eaba3ecda35, type: 2}
+    - target: {fileID: 7932267495216910311, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
+      propertyPath: stoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ccebf623704bb40aa52adc886a02b1, type: 3}
 --- !u!114 &192272963 stripped

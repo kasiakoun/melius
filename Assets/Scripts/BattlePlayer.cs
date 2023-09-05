@@ -11,6 +11,7 @@ public class BattlePlayer : MonoBehaviour, IBattleUnit
     [SerializeField] private float delayBeforeHit;
     [SerializeField] private UnitScriptableObject scriptableObject;
 
+    private readonly float rotationThreshold = 5.0f;
     private NavMeshAgent navMeshAgent;
     private Outline outline;
 
@@ -51,7 +52,7 @@ public class BattlePlayer : MonoBehaviour, IBattleUnit
     {
         var targetRotation = Quaternion.LookRotation(position - transform.position);
 
-        while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > 1.0f)
+        while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > rotationThreshold)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
