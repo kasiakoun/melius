@@ -194,7 +194,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: SwordImage
+    path: 
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -222,7 +222,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.y
-    path: SwordImage
+    path: 
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -250,7 +250,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: 
+    path: ActionImage
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -278,7 +278,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.y
-    path: 
+    path: ActionImage
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -290,28 +290,28 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 116136254
+      path: 0
       attribute: 1967290853
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 116136254
+      path: 0
       attribute: 38095219
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 2846125977
       attribute: 1967290853
       script: {fileID: 0}
       typeID: 224
       customType: 28
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 2846125977
       attribute: 38095219
       script: {fileID: 0}
       typeID: 224
@@ -364,7 +364,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: SwordImage
+    path: 
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -392,7 +392,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.y
-    path: SwordImage
+    path: 
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -420,7 +420,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: 
+    path: ActionImage
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -448,7 +448,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.y
-    path: 
+    path: ActionImage
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
@@ -469,31 +469,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Highlighted
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Pressed
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Selected
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Disabled
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -834,7 +834,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7364493180951614339}
-    m_Position: {x: 305, y: 195, z: 0}
+    m_Position: {x: 70, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8248888990856032402}
     m_Position: {x: 340, y: 260, z: 0}
