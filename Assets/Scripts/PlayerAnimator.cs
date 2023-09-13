@@ -6,7 +6,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string RIGHT_MELLEE_ATTACK = "RightMeleeAttack";
     private const string TAKE_DAMAGE = "TakeDamage";
     
-    [SerializeField] private BattlePlayer player;
+    [SerializeField] private PlayerBattleUnit player;
 
     private Animator animator;
 

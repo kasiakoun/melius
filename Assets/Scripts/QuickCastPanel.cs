@@ -10,7 +10,7 @@ public class QuickCastPanel : MonoBehaviour
     [SerializeField] private PositionPicker positionPicker;
 
     [SerializeField] private Transform quickCastPrefab;
-    [SerializeField] private BattlePlayer player;
+    [SerializeField] private PlayerBattleUnit player;
     [SerializeField] private PickedActionsPanel pickedActionsPanel;
 
     // todo: temp field

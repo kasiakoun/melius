@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BattlePlayer : MonoBehaviour, IBattleUnit
+public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
 {
     [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] private float stoppingDistance;
@@ -45,6 +45,7 @@ public class BattlePlayer : MonoBehaviour, IBattleUnit
         }
 
         navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(0.2f);
         isWalking = false;
     }
 
