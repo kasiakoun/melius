@@ -2,72 +2,49 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Outline))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(UnitAttacking))]
+[RequireComponent(typeof(UnitDamageable))]
+[RequireComponent(typeof(UnitMovement))]
+[RequireComponent(typeof(UnitRotation))]
 public class BattleUnit : MonoBehaviour, IBattleUnit
 {
-    [SerializeField] private UnitAnimator unitAnimator;
-    [SerializeField] private float stoppingDistance;
-    [SerializeField] private float rotateSpeed = 10.0f;
-    [SerializeField] private float delayBeforeHit;
     [SerializeField] private UnitScriptableObject scriptableObject;
 
     private NavMeshAgent navMeshAgent;
     private Outline outline;
-
-    private bool isWalking;
+    private UnitAttacking unitAttacking;
+    private UnitDamageable unitDamageable;
+    private UnitMovement unitMovement;
+    private UnitRotation unitRotation;
 
     public void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
+        unitAttacking = GetComponent<UnitAttacking>();
+        unitDamageable = GetComponent<UnitDamageable>();
+        unitMovement = GetComponent<UnitMovement>();
+        unitRotation = GetComponent<UnitRotation>();
     }
 
-    public bool IsWalking() => isWalking;
+    public bool IsWalking() => unitMovement.IsWalking;
 
     #region IBattleUnit Implementation
 
     public Vector3 Position => navMeshAgent.destination;
     public UnitScriptableObject ScriptableObject => scriptableObject;
 
-    public IEnumerator Move(Vector3 destination)
-    {
-        isWalking = true;
-        navMeshAgent.SetDestination(destination);
-        yield return new WaitForSeconds(0.01f);
-        while (navMeshAgent.remainingDistance > stoppingDistance)
-        {
-            yield return new WaitForFixedUpdate();
-        }
+    public IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);
 
-        navMeshAgent.isStopped = true;
-        isWalking = false;
-    }
+    public IEnumerator Rotate(Vector3 position) => unitRotation.Rotate(position);
 
-    public IEnumerator Rotate(Vector3 position)
-    {
-        var targetRotation = Quaternion.LookRotation(position - transform.position);
+    public void TakeDamage() => unitDamageable.TakeDamage();
 
-        while (Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation)) > 1.0f)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-    }
+    public IEnumerator Attack() => unitAttacking.Attack();
 
-    public void TakeDamage()
-    {
-        unitAnimator.TakeDamage();
-    }
-
-    public IEnumerator Attack()
-    {
-        unitAnimator.Attack();
-        yield return new WaitForSeconds(delayBeforeHit);
-    }
-
-    public void SetHighlightOutline(bool enable)
-    {
-        outline.enabled = enable;
-    }
+    public void SetHighlightOutline(bool enable) => outline.enabled = enable;
 
     #endregion
 }

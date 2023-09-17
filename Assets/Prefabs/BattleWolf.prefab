@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 1446096437467538891}
   - component: {fileID: 6593228678570010467}
   - component: {fileID: 799227984016855359}
+  - component: {fileID: 444481235757915719}
+  - component: {fileID: 3339180511950049591}
+  - component: {fileID: 641471489407839415}
+  - component: {fileID: 3181459869429465505}
   m_Layer: 10
   m_Name: BattleWolf
   m_TagString: Untagged
@@ -70,10 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368a2eed176f3b84391d5fe7bf22315b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitAnimator: {fileID: 5760012275032444451}
-  stoppingDistance: 1.7
-  rotateSpeed: 10
-  delayBeforeHit: 0.9
+  scriptableObject: {fileID: 11400000, guid: 2b8d9c0b9a0df584a83298f1b6a73a6b, type: 2}
 --- !u!114 &6593228678570010467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +107,59 @@ CapsuleCollider:
   m_Height: 2.36
   m_Direction: 2
   m_Center: {x: 0, y: 0.77, z: 0.17}
+--- !u!114 &444481235757915719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204356360670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51192f01a290f8488737b17b672bfcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitAnimator: {fileID: 5760012275032444451}
+  delayBeforeHit: 0.9
+--- !u!114 &3339180511950049591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204356360670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61a31416765e564caef246432a0cdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5760012275032444451}
+--- !u!114 &641471489407839415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204356360670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f06947f7efd314591fb5fca1fcc257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoppingDistance: 1.7
+--- !u!114 &3181459869429465505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204356360670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e629bc0283a468c49b0360f5ae2770de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
 --- !u!1001 &4674477204256692135
 PrefabInstance:
   m_ObjectHideFlags: 0
