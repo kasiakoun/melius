@@ -11,6 +11,7 @@ public class PickedActionsPanel : MonoBehaviour
     [SerializeField] private Transform pickedActionsContainer;
     [SerializeField] private Transform playButton;
     [SerializeField] private BattleHandler battleHandler;
+    [SerializeField] private BattlePlayer battlePlayer;
 
     private readonly List<PickedAction> pickedActions = new List<PickedAction>();
 
@@ -46,7 +47,9 @@ public class PickedActionsPanel : MonoBehaviour
             .Where(p => p.UnitAction != null)
             .Select(p => p.UnitAction)
             .ToList();
-        battleHandler.Handle(unitActions);
+        if (unitActions.Count == 0) return;
+
+        battleHandler.Handle(battlePlayer, unitActions);
     }
 
     public void SetupPickedAction(IUnitAction unitAction)
