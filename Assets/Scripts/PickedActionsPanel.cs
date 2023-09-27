@@ -64,4 +64,7 @@ public class PickedActionsPanel : MonoBehaviour
             pickedAction.ClearAction();
         }
     }
+
+    public void HidePanel() => gameObject.SetActive(false);
+    public void ShowPanel() => gameObject.SetActive(true);
 }

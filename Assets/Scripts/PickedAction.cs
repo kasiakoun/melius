@@ -40,4 +40,7 @@ public class PickedAction : MonoBehaviour
         IsCleared = true;
         UnitAction = null;
     }
+
+    public void Hide() => gameObject.SetActive(false);
+    public void Show() => gameObject.SetActive(true);
 }

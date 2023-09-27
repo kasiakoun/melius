@@ -5,10 +5,18 @@ using UnityEngine;
 public class BattleUI : MonoBehaviour
 {
     [SerializeField] private BattleHandler battleHandler;
+    [SerializeField] private QuickCastPanel quickCastPanel;
+    [SerializeField] private PickedActionsPanel pickedActionsPanel;
 
-    public void AttackClicked()
+    public void Hide()
     {
-        //battleHandler.Handle();
-        Debug.Log("AttackClicked");
+        quickCastPanel.HidePanel();
+        pickedActionsPanel.HidePanel();
+    }
+
+    public void Show()
+    {
+        quickCastPanel.ShowPanel();
+        pickedActionsPanel.ShowPanel();
     }
 }

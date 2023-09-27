@@ -44,4 +44,7 @@ public class QuickCast : MonoBehaviour
 
         ButtonClicked?.Invoke(unitActionScriptableObject);
     }
+
+    public void Hide() => gameObject.SetActive(false);
+    public void Show() => gameObject.SetActive(true);
 }

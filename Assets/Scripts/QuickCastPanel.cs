@@ -105,4 +105,7 @@ public class QuickCastPanel : MonoBehaviour
 
         pickedActionsPanel.SetupPickedAction(unitAction);
     }
+
+    public void HidePanel() => quickCasts.ForEach(p => p.Hide());
+    public void ShowPanel() => quickCasts.ForEach(p => p.Show());
 }
