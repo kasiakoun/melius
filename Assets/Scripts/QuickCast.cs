@@ -32,7 +32,7 @@ public class QuickCast : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);

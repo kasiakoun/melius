@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerTurnManager : MonoBehaviour
 {
@@ -69,9 +71,11 @@ public class PlayerTurnManager : MonoBehaviour
         allAvailablePlayers.Insert(0, battlePlayer);
 
         var randomPlayers = new List<IBattleTurnPlayer>();
+        var seed = (int)(DateTime.Now.Ticks % int.MaxValue);
+        Random.InitState(seed);
         for (var i = allAvailablePlayers.Count - 1; i >= 0; i--)
         {
-            var randomPlayerIndex = Random.Range(0, allAvailablePlayers.Count - 1);
+            var randomPlayerIndex = Random.Range(0, allAvailablePlayers.Count);
             var randomPlayer = allAvailablePlayers[randomPlayerIndex];
 
             randomPlayers.Add(randomPlayer);

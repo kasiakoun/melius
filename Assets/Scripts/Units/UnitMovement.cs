@@ -11,7 +11,7 @@ public class UnitMovement : MonoBehaviour
 
     public bool IsWalking { get; private set; }
 
-    public void Start()
+    private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
     }

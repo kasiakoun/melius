@@ -19,7 +19,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     private UnitMovement unitMovement;
     private UnitRotation unitRotation;
 
-    public void Start()
+    private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();

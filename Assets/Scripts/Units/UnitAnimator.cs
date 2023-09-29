@@ -12,7 +12,7 @@ public class UnitAnimator : MonoBehaviour
 
     private Animator animator;
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
