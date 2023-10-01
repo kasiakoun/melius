@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerTurnManager : MonoBehaviour
+public class PlayerTurnManager : PlayerTurnStateMachine
 {
     [SerializeField] private BattlePlayer battlePlayer;
     [SerializeField] private ComputerBattlePlayer[] computerBattlePlayers;
@@ -12,7 +12,8 @@ public class PlayerTurnManager : MonoBehaviour
     [SerializeField] private BattleUI battleUi;
 
     private List<BattlePlayerTurn> currentRandomBattlePlayerTurns;
-    private BattlePlayerTurn currentBattlePlayerTurn;
+
+    public override BattleUI BattleUi => battleUi;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class PlayerTurnManager : MonoBehaviour
 
     private void Start()
     {
+        currentState = initializeTurnState;
         NextTurn();
     }
 
@@ -48,21 +50,7 @@ public class PlayerTurnManager : MonoBehaviour
         }
 
         var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver);
-        if (currentBattlePlayerTurn?.BattlePlayer == battlePlayerTurn.BattlePlayer)
-        {
-
-        }
-        else if (battlePlayerTurn.BattlePlayer is BattlePlayer)
-        {
-            battleUi.Show();
-        }
-        else if (battlePlayerTurn.BattlePlayer is ComputerBattlePlayer)
-        {
-            battleUi.Hide();
-        }
-
-        battlePlayerTurn.BattlePlayer.MakeTurn();
-        currentBattlePlayerTurn = battlePlayerTurn;
+        currentState.OnNextTurn(this, battlePlayerTurn);
     }
 
     private List<BattlePlayerTurn> CreateRandomBattlePlayerTurns()

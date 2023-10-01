@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUnit: {fileID: 473384304}
+  battleHandler: {fileID: 488192619}
 --- !u!4 &381990020
 Transform:
   m_ObjectHideFlags: 0
@@ -1893,7 +1894,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUnit: {fileID: 0}
-  battleUI: {fileID: 726370321}
 --- !u!4 &1544796887
 Transform:
   m_ObjectHideFlags: 0
