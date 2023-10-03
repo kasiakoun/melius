@@ -27,7 +27,7 @@ public class PlayerTurnManager : PlayerTurnStateMachine
 
     private void Start()
     {
-        currentState = initializeTurnState;
+        ChangeState(initializeTurnState);
         NextTurn();
     }
 

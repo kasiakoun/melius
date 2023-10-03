@@ -18,6 +18,8 @@ public class InitializeTurnState : IBattlePlayerTurnState
         {
             stateMachine.ChangeState(stateMachine.enemyTurnState);
         }
+
+        battlePlayerTurn.BattlePlayer.MakeTurn();
     }
 
     public void UpdateState()

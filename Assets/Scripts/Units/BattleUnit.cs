@@ -33,7 +33,7 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
 
     #region IBattleUnit Implementation
 
-    public Vector3 Position => navMeshAgent.destination;
+    public Vector3 Position => transform.position;
     public UnitScriptableObject ScriptableObject => scriptableObject;
 
     public IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);

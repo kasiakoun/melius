@@ -27,7 +27,6 @@ public class PlayerAnimator : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("TakeDamage");
         animator.SetTrigger(TAKE_DAMAGE);
     }
 }
