@@ -5,7 +5,7 @@ public class UnitRotation : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 10.0f;
 
-    private readonly float rotationThreshold = 5.0f;
+    private readonly float rotationThreshold = 30.0f;
 
     public IEnumerator Rotate(Vector3 position)
     {
