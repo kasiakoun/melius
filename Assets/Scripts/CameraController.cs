@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
     public void Start()
     {
         gameInput.MouseMoved += OnMouseMoved;
+        currentRotationX = transform.eulerAngles.x;
+        currentRotationY = transform.eulerAngles.y;
     }
 
     private void OnMouseMoved(Vector2 mouseDelta)
