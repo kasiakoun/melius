@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: fb1fc46456f36c5408de294a7727f5ae, type: 3}
+  initialMaxHealth: 120

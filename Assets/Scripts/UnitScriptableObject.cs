@@ -6,4 +6,5 @@ using UnityEngine;
 public class UnitScriptableObject : ScriptableObject
 {
     public Sprite icon;
+    public int initialMaxHealth;
 }

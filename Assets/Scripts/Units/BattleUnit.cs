@@ -8,6 +8,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitDamageable))]
 [RequireComponent(typeof(UnitMovement))]
 [RequireComponent(typeof(UnitRotation))]
+[RequireComponent(typeof(UnitHealth))]
 public class BattleUnit : MonoBehaviour, IBattleUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
@@ -18,6 +19,7 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
     private UnitDamageable unitDamageable;
     private UnitMovement unitMovement;
     private UnitRotation unitRotation;
+    private UnitHealth unitHealth;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
         unitDamageable = GetComponent<UnitDamageable>();
         unitMovement = GetComponent<UnitMovement>();
         unitRotation = GetComponent<UnitRotation>();
+        unitHealth = GetComponent<UnitHealth>();
+        unitHealth.SetMaxHealth(scriptableObject.initialMaxHealth);
     }
 
     public bool IsWalking() => unitMovement.IsWalking;
