@@ -6,10 +6,10 @@ public class UnitAnimator : MonoBehaviour
 {
     private const string TAKE_DAMAGE = "TakeDamage";
     private const string ATTACK = "Attack";
+    private const string DEATH = "Death";
     private const string IS_WALKING = "IsWalking";
 
     [SerializeField] private BattleUnit unit;
-
     private Animator animator;
 
     private void Awake()
@@ -30,5 +30,10 @@ public class UnitAnimator : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger(ATTACK);
+    }
+
+    public void Death()
+    {
+        animator.Play(DEATH);
     }
 }

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 641471489407839415}
   - component: {fileID: 3181459869429465505}
   - component: {fileID: 392763966492054336}
+  - component: {fileID: 6151807526491691816}
   m_Layer: 10
   m_Name: BattleWolf
   m_TagString: Untagged
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5760012275032444451}
-  unitHealth: {fileID: 0}
 --- !u!114 &641471489407839415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +175,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063bc0f90175a8046903addeba1edaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6151807526491691816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674477204356360670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64717d720a619d64e8e3e27ec10b7536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitAnimator: {fileID: 5760012275032444451}
+  healthBar: {fileID: 2098046012287253526}
 --- !u!1001 &4674477204256692135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,6 +356,17 @@ PrefabInstance:
       objectReference: {fileID: 392763966492054336}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b85c11bf1acb634aa89b4d6b3c12c2b, type: 3}
+--- !u!114 &2098046012287253526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8582938669979574277, guid: 7b85c11bf1acb634aa89b4d6b3c12c2b, type: 3}
+  m_PrefabInstance: {fileID: 7638518958002723859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f516fbd52842b66438359bbc838c80cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5958623492920706568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084818715143625243, guid: 7b85c11bf1acb634aa89b4d6b3c12c2b, type: 3}

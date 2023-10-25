@@ -34,7 +34,7 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     private void OnPlayerFinishActing(IBattleTurnPlayer battleTurnPlayer)
     {
         var battlePlayerTurn = currentRandomBattlePlayerTurns
-            .FirstOrDefault(p => p.BattlePlayer == battleTurnPlayer && !p.TurnIsOver);
+            .FirstOrDefault(p => p.BattlePlayer == battleTurnPlayer && !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);
         if (battlePlayerTurn == null) return;
 
         battlePlayerTurn.TurnIsOver = true;
@@ -49,7 +49,8 @@ public class PlayerTurnManager : PlayerTurnStateMachine
             currentRandomBattlePlayerTurns = CreateRandomBattlePlayerTurns();
         }
 
-        var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver);
+        var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);
+        if (battlePlayerTurn == null) return;
         currentState.OnNextTurn(this, battlePlayerTurn);
     }
 

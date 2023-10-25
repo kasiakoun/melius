@@ -4,7 +4,7 @@ using UnityEngine;
 public class UnitDamageable : MonoBehaviour
 {
     [SerializeField] private UnitAnimator animator;
-    [SerializeField] private UnitHealth unitHealth;
+    private UnitHealth unitHealth;
 
     private void Awake()
     {

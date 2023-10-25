@@ -27,4 +27,6 @@ public class HealthBar : MonoBehaviour
     {
         microBar.UpdateHealthBar(val);
     }
+
+    public void Hide() => gameObject.SetActive(false);
 }
