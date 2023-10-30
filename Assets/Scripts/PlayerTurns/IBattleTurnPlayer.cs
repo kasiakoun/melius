@@ -1,5 +1,8 @@
+using UnityEngine.UI;
+
 public interface IBattleTurnPlayer
 {
-    void MakeTurn();
     bool UnitIsDead { get; }
+    IBattleUnit BattleUnit { get; }
+    void MakeTurn();
 }

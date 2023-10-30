@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class QuickCastPanel : MonoBehaviour
 {
-    private const int MAX_QUICK_CASTS = 9;
+    private const int MAX_QUICK_CASTS = 5;
 
     // todo: replace unitPicker / positionPicker
     [SerializeField] private UnitPicker unitPicker;

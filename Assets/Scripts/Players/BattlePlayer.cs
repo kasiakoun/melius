@@ -22,13 +22,14 @@ public class BattlePlayer : MonoBehaviour, IBattleTurnPlayer
 
     #region IBattlePlayerTurn Implementation
 
+    public bool UnitIsDead { get; private set; }
+    public IBattleUnit BattleUnit => battleUnit;
+
     public void MakeTurn()
     {
         Debug.Log("BattlePlayer: MakeTurn");
         //battleUI.Show();
     }
-
-    public bool UnitIsDead { get; private set; }
 
     #endregion
 }

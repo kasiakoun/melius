@@ -12,8 +12,11 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     [SerializeField] private BattleUI battleUi;
 
     private List<BattlePlayerTurn> currentRandomBattlePlayerTurns;
+    private List<BattlePlayerTurn> playerTurns = new List<BattlePlayerTurn>();
 
     public override BattleUI BattleUi => battleUi;
+
+    public event Action<List<BattlePlayerTurn>> PlayerTurnsChanged;
 
     private void Awake()
     {
@@ -47,6 +50,8 @@ public class PlayerTurnManager : PlayerTurnStateMachine
             currentRandomBattlePlayerTurns.All(p => p.TurnIsOver))
         {
             currentRandomBattlePlayerTurns = CreateRandomBattlePlayerTurns();
+            playerTurns.AddRange(currentRandomBattlePlayerTurns);
+            PlayerTurnsChanged?.Invoke(playerTurns);
         }
 
         var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);

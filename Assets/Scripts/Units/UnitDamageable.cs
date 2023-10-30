@@ -15,6 +15,6 @@ public class UnitDamageable : MonoBehaviour
     {
         animator.TakeDamage();
         // todo: replace with dynamic damage
-        unitHealth.Damage(10);
+        unitHealth.Damage(40);
     }
 }

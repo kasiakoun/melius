@@ -25,6 +25,9 @@ public class ComputerBattlePlayer : MonoBehaviour, IBattleTurnPlayer
 
     #region IBattlePlayerTurn Implementation
 
+    public bool UnitIsDead { get; private set; }
+    public IBattleUnit BattleUnit => battleUnit;
+
     public void MakeTurn()
     {
         Debug.Log("ComputerBattlePlayer: MakeTurn");
@@ -39,8 +42,6 @@ public class ComputerBattlePlayer : MonoBehaviour, IBattleTurnPlayer
         var attackAction = new AttackUnitAction(attackActionScriptableObject, battleUnit, enemyTarget);
         battleHandler.Handle(this, new List<IUnitAction> { attackAction });
     }
-
-    public bool UnitIsDead { get; private set; }
 
     #endregion
 }
