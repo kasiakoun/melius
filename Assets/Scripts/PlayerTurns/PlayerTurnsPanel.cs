@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerTurnsPanel : MonoBehaviour
@@ -9,14 +10,33 @@ public class PlayerTurnsPanel : MonoBehaviour
     [SerializeField] private GameObject playerTurns;
     [SerializeField] private Transform playerTurnPrefab;
 
+    private List<(BattlePlayerTurn BattlePlayerTurn, PlayerTurn PlayerTurn)> _turnCollection = new();
+    private PlayerTurn _lastPlayerTurn;
+
     private void Awake()
     {
         playerTurnManager.PlayerTurnsChanged += OnPlayerTurnsChanged;
+        playerTurnManager.TurnChanged += OnTurnChanged;
     }
 
     private void OnDestroy()
     {
         playerTurnManager.PlayerTurnsChanged -= OnPlayerTurnsChanged;
+        playerTurnManager.TurnChanged -= OnTurnChanged;
+    }
+
+    private void OnTurnChanged(BattlePlayerTurn battlePlayerTurn)
+    {
+        if (_lastPlayerTurn != null)
+        {
+            _lastPlayerTurn.DisableGlow();
+        }
+        var playerTurn = _turnCollection
+            .Where(p => p.BattlePlayerTurn == battlePlayerTurn)
+            .Select(p => p.PlayerTurn)
+            .FirstOrDefault();
+        playerTurn?.EnableGlow();
+        _lastPlayerTurn = playerTurn;
     }
 
     private void OnPlayerTurnsChanged(List<BattlePlayerTurn> list)
@@ -48,6 +68,8 @@ public class PlayerTurnsPanel : MonoBehaviour
 
             var playerTurn = playerTurnTransform.GetComponent<PlayerTurn>();
             playerTurn.PlayerTurnImage.sprite = battlePlayerTurn.BattlePlayer.BattleUnit.ScriptableObject.icon;
+
+            _turnCollection.Add((battlePlayerTurn, playerTurn));
         }
     }
 }

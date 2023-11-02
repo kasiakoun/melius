@@ -12,11 +12,13 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     [SerializeField] private BattleUI battleUi;
 
     private List<BattlePlayerTurn> currentRandomBattlePlayerTurns;
+    private List<BattlePlayerTurn> nextRandomBattlePlayerTurns;
     private List<BattlePlayerTurn> playerTurns = new List<BattlePlayerTurn>();
 
     public override BattleUI BattleUi => battleUi;
 
     public event Action<List<BattlePlayerTurn>> PlayerTurnsChanged;
+    public event Action<BattlePlayerTurn> TurnChanged;
 
     private void Awake()
     {
@@ -46,17 +48,24 @@ public class PlayerTurnManager : PlayerTurnStateMachine
 
     private void NextTurn()
     {
-        if (currentRandomBattlePlayerTurns == null ||
-            currentRandomBattlePlayerTurns.All(p => p.TurnIsOver))
-        {
-            currentRandomBattlePlayerTurns = CreateRandomBattlePlayerTurns();
-            playerTurns.AddRange(currentRandomBattlePlayerTurns);
-            PlayerTurnsChanged?.Invoke(playerTurns);
-        }
+        TryToSetupBattlePlayerTurns();
 
         var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);
         if (battlePlayerTurn == null) return;
         currentState.OnNextTurn(this, battlePlayerTurn);
+        TurnChanged?.Invoke(battlePlayerTurn);
+    }
+
+    private void TryToSetupBattlePlayerTurns()
+    {
+        if (currentRandomBattlePlayerTurns != null &&
+            !currentRandomBattlePlayerTurns.All(p => p.TurnIsOver)) return;
+
+        currentRandomBattlePlayerTurns = nextRandomBattlePlayerTurns ?? CreateRandomBattlePlayerTurns();
+        nextRandomBattlePlayerTurns = CreateRandomBattlePlayerTurns();
+
+        playerTurns.AddRange(currentRandomBattlePlayerTurns);
+        PlayerTurnsChanged?.Invoke(playerTurns);
     }
 
     private List<BattlePlayerTurn> CreateRandomBattlePlayerTurns()
