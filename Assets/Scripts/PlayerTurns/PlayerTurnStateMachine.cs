@@ -7,6 +7,8 @@ public abstract class PlayerTurnStateMachine : MonoBehaviour
     public EnemyTurnState enemyTurnState = new EnemyTurnState();
     public PlayerTurnState playerTurnState = new PlayerTurnState();
     public InitializeTurnState initializeTurnState = new InitializeTurnState();
+    public VictoryTurnState victoryTurnState = new VictoryTurnState();
+    public LostTurnState lostTurnState = new LostTurnState();
 
     public abstract BattleUI BattleUi { get; }
 
@@ -21,4 +23,8 @@ public abstract class PlayerTurnStateMachine : MonoBehaviour
         currentState = state;
         currentState.OnEnter(this);
     }
+
+    public abstract void MakeVictory();
+    public abstract void MakeLost();
+
 }

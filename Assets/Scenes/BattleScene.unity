@@ -697,6 +697,8 @@ MonoBehaviour:
   - {fileID: 381990019}
   playersTurnEventsHandler: {fileID: 716594624}
   battleUi: {fileID: 726370321}
+  victoryText: {fileID: 1167126425}
+  lostText: {fileID: 1991188868}
 --- !u!4 &294888600
 Transform:
   m_ObjectHideFlags: 0

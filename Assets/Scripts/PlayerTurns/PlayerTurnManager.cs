@@ -10,12 +10,12 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     [SerializeField] private ComputerBattlePlayer[] computerBattlePlayers;
     [SerializeField] private PlayerTurnEventsHandler playersTurnEventsHandler;
     [SerializeField] private BattleUI battleUi;
+    [SerializeField] private GameObject victoryText;
+    [SerializeField] private GameObject lostText;
 
     private List<BattlePlayerTurn> currentRandomBattlePlayerTurns;
     private List<BattlePlayerTurn> nextRandomBattlePlayerTurns;
     private List<BattlePlayerTurn> playerTurns = new List<BattlePlayerTurn>();
-
-    public override BattleUI BattleUi => battleUi;
 
     public event Action<List<BattlePlayerTurn>> PlayerTurnsChanged;
     public event Action<BattlePlayerTurn> TurnChanged;
@@ -50,9 +50,16 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     {
         TryToSetupBattlePlayerTurns();
 
-        var battlePlayerTurn = currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);
-        if (battlePlayerTurn == null) return;
+        var oneUnitIsAlive = currentRandomBattlePlayerTurns
+            .Where(p => !p.BattlePlayer.UnitIsDead)
+            .Select(p => p.BattlePlayer)
+            .Distinct()
+            .Count() == 1;
+        var battlePlayerTurn = oneUnitIsAlive
+            ? null
+            : currentRandomBattlePlayerTurns.FirstOrDefault(p => !p.TurnIsOver && !p.BattlePlayer.UnitIsDead);
         currentState.OnNextTurn(this, battlePlayerTurn);
+        if (battlePlayerTurn == null) return;
         TurnChanged?.Invoke(battlePlayerTurn);
     }
 
@@ -87,5 +94,18 @@ public class PlayerTurnManager : PlayerTurnStateMachine
 
         var battlePlayerTurns = randomPlayers.Select(p => new BattlePlayerTurn(p)).ToList();
         return battlePlayerTurns;
+    }
+
+    public override BattleUI BattleUi => battleUi;
+    public override void MakeVictory()
+    {
+        BattleUi.Hide();
+        victoryText.SetActive(true);
+    }
+
+    public override void MakeLost()
+    {
+        BattleUi.Hide();
+        lostText.SetActive(true);
     }
 }

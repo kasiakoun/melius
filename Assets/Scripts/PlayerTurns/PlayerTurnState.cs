@@ -11,12 +11,16 @@ public class PlayerTurnState : IBattlePlayerTurnState
 
     public void OnNextTurn(PlayerTurnStateMachine stateMachine, BattlePlayerTurn battlePlayerTurn)
     {
-        if (battlePlayerTurn.BattlePlayer is ComputerBattlePlayer)
+        if (battlePlayerTurn == null)
+        {
+            stateMachine.ChangeState(stateMachine.victoryTurnState);
+        }
+        else if (battlePlayerTurn.BattlePlayer is ComputerBattlePlayer)
         {
             stateMachine.ChangeState(stateMachine.enemyTurnState);
         }
 
-        battlePlayerTurn.BattlePlayer.MakeTurn();
+        battlePlayerTurn?.BattlePlayer.MakeTurn();
     }
 
     public void UpdateState()
