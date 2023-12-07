@@ -5,6 +5,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string IS_WALKING = "IsWalking";
     private const string RIGHT_MELLEE_ATTACK = "RightMeleeAttack";
     private const string TAKE_DAMAGE = "TakeDamage";
+    private const string BOW_SHOT = "BowShot";
     
     [SerializeField] private PlayerBattleUnit player;
 
@@ -28,5 +29,10 @@ public class PlayerAnimator : MonoBehaviour
     public void TakeDamage()
     {
         animator.SetTrigger(TAKE_DAMAGE);
+    }
+
+    public void BowShot()
+    {
+        animator.SetTrigger(BOW_SHOT);
     }
 }

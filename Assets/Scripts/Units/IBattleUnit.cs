@@ -10,6 +10,6 @@ public interface IBattleUnit
     IEnumerator Move(Vector3 destination);
     IEnumerator Rotate(Vector3 unit);
     void TakeDamage();
-    IEnumerator Attack();
+    IEnumerator Attack(IBattleUnit targetBattleUnit);
     void SetHighlightOutline(bool enable);
 }

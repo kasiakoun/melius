@@ -9,6 +9,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitMovement))]
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
+[RequireComponent(typeof(UnitEquipment))]
 public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
@@ -20,6 +21,8 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     private UnitMovement unitMovement;
     private UnitRotation unitRotation;
     private UnitHealth unitHealth;
+    private UnitEquipment unitEquipment;
+    private WeaponScriptableObject weaponScriptableObject;
 
     private void Awake()
     {
@@ -31,6 +34,11 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
         unitRotation = GetComponent<UnitRotation>();
         unitHealth = GetComponent<UnitHealth>();
         unitHealth.SetMaxHealth(scriptableObject.initialMaxHealth);
+        unitEquipment = GetComponent<UnitEquipment>();
+
+        // todo: get weapon ScriptableObject from another place(inventory or something like this)
+        weaponScriptableObject = Resources.Load<WeaponScriptableObject>("ScriptableObject/Weapons/Bow");
+        unitEquipment.SetWeaponByPrefab(weaponScriptableObject.prefab);
     }
 
     public bool IsWalking() => unitMovement.IsWalking;
@@ -46,7 +54,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
 
     public void TakeDamage() => unitDamageable.TakeDamage();
 
-    public IEnumerator Attack() => unitAttacking.Attack();
+    public IEnumerator Attack(IBattleUnit targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
 
     public void SetHighlightOutline(bool enable) => outline.enabled = enable;
 

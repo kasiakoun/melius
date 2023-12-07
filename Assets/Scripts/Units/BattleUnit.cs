@@ -46,7 +46,7 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
 
     public void TakeDamage() => unitDamageable.TakeDamage();
 
-    public IEnumerator Attack() => unitAttacking.Attack();
+    public IEnumerator Attack(IBattleUnit targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
 
     public void SetHighlightOutline(bool enable) => outline.enabled = enable;
 
