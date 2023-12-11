@@ -4,7 +4,10 @@ using UnityEngine;
 public class UnitDamageable : MonoBehaviour
 {
     [SerializeField] private UnitAnimator animator;
+    [SerializeField] private Transform target;
     private UnitHealth unitHealth;
+
+    public Transform Target => target;
 
     private void Awake()
     {

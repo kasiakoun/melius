@@ -46,6 +46,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     #region IBattleUnit Implementation
 
     public Vector3 Position => transform.position;
+    public Vector3 TargetPosition => transform.position;
     public UnitScriptableObject ScriptableObject => scriptableObject;
 
     public IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);

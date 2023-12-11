@@ -2167,11 +2167,15 @@ PrefabInstance:
       objectReference: {fileID: 646370545}
     - target: {fileID: 4784177274600086993, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
       propertyPath: arrowSpeed
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4784177274600086993, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
       propertyPath: arrowRotateSpeed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784177274600086993, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
+      propertyPath: arrowRotationSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5845571253132317528, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
       propertyPath: m_LocalPosition.x

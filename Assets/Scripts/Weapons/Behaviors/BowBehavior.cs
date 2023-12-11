@@ -1,18 +1,19 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class BowBehavior : WeaponBehavior<Bow>
 {
     [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] private Transform arrowPrefab;
     [SerializeField] private Transform arrowHolder;
-    [SerializeField] private float arrowSpeed = 1.0f;
-    [SerializeField] private float arrowRotateSpeed = 100.0f;
+    [SerializeField] private float arrowSpeed = 7f;
+    [SerializeField] private float arrowRotationSpeed = 3f;
     [SerializeField] private float waitSecondsToShot = 0.45f;
 
     public override IEnumerator Attack(Weapon weapon, IBattleUnit targetBattleUnit)
     {
+        //yield return new WaitForSeconds(2);
         var bow = weapon as Bow;
         if (bow == null)
         {
@@ -27,19 +28,22 @@ public class BowBehavior : WeaponBehavior<Bow>
         yield return new WaitForSeconds(waitSecondsToShot);
         arrow.parent = null;
 
-        var targetPosition = targetBattleUnit.Position;
-        var maxDistance = 0.05f;
-        var moveDirection = (targetPosition - arrow.position).normalized;
+        var targetPosition = targetBattleUnit.TargetPosition;
+        var maxDistance = 0.75f;
         while (Vector3.Distance(arrow.position, targetPosition) > maxDistance)
         {
-            // todo: arrow rotation does not work
             arrow.position = Vector3.MoveTowards(arrow.position, targetPosition, Time.fixedDeltaTime * arrowSpeed);
-            arrow.forward = Vector3.Slerp(arrow.forward, moveDirection, Time.fixedDeltaTime * arrowRotateSpeed);
+
+            var relativePos = targetPosition - arrow.position;
+            var toRotation = Quaternion.LookRotation(relativePos);
+            arrow.rotation = Quaternion.Lerp(arrow.rotation, toRotation, Time.deltaTime * arrowRotationSpeed);
+
             Debug.Log($"arrow.position = {arrow.position}");
             yield return new WaitForFixedUpdate();
         }
 
-        Destroy(arrow.gameObject);
+        // todo: replace this line with another behavior
+        //Destroy(arrow.gameObject);
     }
 
     private Transform CreateArrow()
