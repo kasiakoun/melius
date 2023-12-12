@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAnimator : BaseUnitAnimator
 {
     private const string IS_WALKING = "IsWalking";
     private const string RIGHT_MELLEE_ATTACK = "RightMeleeAttack";
@@ -26,9 +26,14 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetTrigger(RIGHT_MELLEE_ATTACK);
     }
 
-    public void TakeDamage()
+    public override void TakeDamage()
     {
         animator.SetTrigger(TAKE_DAMAGE);
+    }
+
+    public override void SimpleAttack()
+    {
+        animator.SetTrigger(RIGHT_MELLEE_ATTACK);
     }
 
     public void BowShot()

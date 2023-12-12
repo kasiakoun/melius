@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAnimator : MonoBehaviour
+public class UnitAnimator : BaseUnitAnimator
 {
     private const string TAKE_DAMAGE = "TakeDamage";
     private const string ATTACK = "Attack";
@@ -22,9 +22,14 @@ public class UnitAnimator : MonoBehaviour
         animator.SetBool(IS_WALKING, unit.IsWalking());
     }
 
-    public void TakeDamage()
+    public override void TakeDamage()
     {
         animator.SetTrigger(TAKE_DAMAGE);
+    }
+
+    public override void SimpleAttack()
+    {
+        animator.SetTrigger(ATTACK);
     }
 
     public void Attack()

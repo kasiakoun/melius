@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(UnitHealth))]
 public class UnitDamageable : MonoBehaviour
 {
-    [SerializeField] private UnitAnimator animator;
+    [SerializeField] private BaseUnitAnimator animator;
     [SerializeField] private Transform target;
     private UnitHealth unitHealth;
 
@@ -18,6 +18,6 @@ public class UnitDamageable : MonoBehaviour
     {
         animator.TakeDamage();
         // todo: replace with dynamic damage
-        unitHealth.Damage(40);
+        unitHealth.Damage(5);
     }
 }

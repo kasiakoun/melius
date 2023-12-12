@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(UnitPlayerAttacking))]
-[RequireComponent(typeof(UnitPlayerDamageable))]
+[RequireComponent(typeof(UnitAttacking))]
+[RequireComponent(typeof(UnitDamageable))]
 [RequireComponent(typeof(UnitMovement))]
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
@@ -16,8 +16,8 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
 
     private NavMeshAgent navMeshAgent;
     private Outline outline;
-    private UnitPlayerAttacking unitAttacking;
-    private UnitPlayerDamageable unitDamageable;
+    private UnitAttacking unitAttacking;
+    private UnitDamageable unitDamageable;
     private UnitMovement unitMovement;
     private UnitRotation unitRotation;
     private UnitHealth unitHealth;
@@ -28,8 +28,8 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         outline = GetComponent<Outline>();
-        unitAttacking = GetComponent<UnitPlayerAttacking>();
-        unitDamageable = GetComponent<UnitPlayerDamageable>();
+        unitAttacking = GetComponent<UnitAttacking>();
+        unitDamageable = GetComponent<UnitDamageable>();
         unitMovement = GetComponent<UnitMovement>();
         unitRotation = GetComponent<UnitRotation>();
         unitHealth = GetComponent<UnitHealth>();
@@ -46,7 +46,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     #region IBattleUnit Implementation
 
     public Vector3 Position => transform.position;
-    public Vector3 TargetPosition => transform.position;
+    public Vector3 TargetPosition => unitDamageable.Target.position;
     public UnitScriptableObject ScriptableObject => scriptableObject;
 
     public IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);

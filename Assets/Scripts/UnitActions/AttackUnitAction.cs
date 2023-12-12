@@ -20,7 +20,8 @@ public class AttackUnitAction : UnitAction
     {
         // todo: should we move / rotate when attacks is melee / range
         //yield return owner.Move(target.Position);
-        //yield return owner.Rotate(target.Position);
+        yield return owner.Rotate(target.Position);
         yield return owner.Attack(target);
+        target.TakeDamage();
     }
 }

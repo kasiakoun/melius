@@ -9,7 +9,7 @@ public abstract class WeaponBehavior<TWeapon> : WeaponBehavior where TWeapon : W
 
 public abstract class WeaponBehavior : MonoBehaviour
 {
-    public abstract Type WeaponType { get; }
+    public virtual Type WeaponType { get; }
     public abstract IEnumerator Attack(Weapon weapon, IBattleUnit targetBattleUnit);
 
     public bool IsWeaponType(Weapon weapon)
