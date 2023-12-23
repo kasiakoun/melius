@@ -47,7 +47,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1468644596831441493}
   arrowPrefab: {fileID: 2234056915737248917, guid: d69659ae75b4a9946a26caee00df4f4a, type: 3}
   arrowHolder: {fileID: 5813407887139562231}
-  arrowSpeed: 7
+  arrowSpeed: 10
   arrowRotationSpeed: 3
   waitSecondsToShot: 0.45
 --- !u!1 &1466473522483985970
