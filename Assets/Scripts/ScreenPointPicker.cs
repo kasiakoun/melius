@@ -1,0 +1,21 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class ScreenPointPicker : MonoBehaviour
+{
+    [SerializeField] private GameInput gameInput;
+
+    [SerializeField] private PositionPicker positionPicker;
+    [SerializeField] private UnitPicker unitPicker;
+
+    public void Start()
+    {
+        gameInput.MouseLeftClicked += OnMouseLeftClicked;
+    }
+
+    private void OnMouseLeftClicked(Vector3 vector)
+    {
+        if (unitPicker.HandleLeftClick(vector)) return;
+        if (positionPicker.HandleLeftClick(vector)) return;
+    }
+}

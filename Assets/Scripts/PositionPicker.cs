@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PositionPicker : MonoBehaviour
 {
-    [SerializeField] private GameInput gameInput;
     [SerializeField] private Terrain terrain;
     [SerializeField] private LayerMask terrainLayerMask;
 
@@ -11,23 +10,19 @@ public class PositionPicker : MonoBehaviour
 
     public event Action<Vector3> PositionPicked;
 
-    public void Start()
+    public bool HandleLeftClick(Vector3 vector)
     {
-        gameInput.MouseLeftClicked += OnMouseLeftClicked;
-    }
-
-    private void OnMouseLeftClicked(Vector3 vector)
-    {
-        if (!isPicking) return;
+        if (!isPicking) return false;
 
         var ray = Camera.main.ScreenPointToRay(vector);
         var contactPoint = GetContactPoint(ray);
-        if (!contactPoint.HasValue) return;
+        if (!contactPoint.HasValue) return false;
 
         Debug.Log($"contact point: {contactPoint.Value}");
         PositionPicked?.Invoke(contactPoint.Value);
 
         StopPicking();
+        return true;
     }
 
     private Vector3? GetContactPoint(Ray ray)

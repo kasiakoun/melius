@@ -10,7 +10,6 @@ public class PickedUnitsEventArgs : EventArgs
 
 public class UnitPicker : MonoBehaviour
 {
-    [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask unitLayerMask;
 
     private List<IBattleUnit> battleUnits;
@@ -23,23 +22,23 @@ public class UnitPicker : MonoBehaviour
     {
         var battleUnits = FindObjectsByType<BattleUnit>(FindObjectsSortMode.None);
         this.battleUnits = battleUnits.Cast<IBattleUnit>().ToList();
-
-        gameInput.MouseLeftClicked += OnMouseLeftClicked;
     }
 
-    private void OnMouseLeftClicked(Vector3 vector)
+    public bool HandleLeftClick(Vector3 vector)
     {
-        if (!isPicking) return;
+        if (!isPicking) return false;
 
         var ray = Camera.main.ScreenPointToRay(vector);
         var battleUnit = GetBattleUnitByRay(ray);
-        if (battleUnit == null) return;
+        if (battleUnit == null) return false;
 
         UnitsPicked?.Invoke(new PickedUnitsEventArgs()
         {
             PickedUnits = new List<IBattleUnit> { battleUnit }
         });
         StopPicking();
+
+        return true;
     }
 
     private IBattleUnit GetBattleUnitByRay(Ray ray)

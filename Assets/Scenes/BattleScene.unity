@@ -275,6 +275,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c97d4b7ea23ac14eb2ad21a192944d9, type: 3}
+--- !u!1 &82152518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 82152520}
+  - component: {fileID: 82152519}
+  m_Layer: 0
+  m_Name: ScreenPointPicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &82152519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82152518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68637de7cb840d46aaaa80b3ba38685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameInput: {fileID: 165196706}
+  positionPicker: {fileID: 1146124696}
+  unitPicker: {fileID: 924474784}
+--- !u!4 &82152520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82152518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &82995088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb634a881765754084a0b7296aa8936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: 165196706}
   unitLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -1464,7 +1510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f38c1821f61b94393d79eae60c90ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: 165196706}
   terrain: {fileID: 173920191}
   terrainLayerMask:
     serializedVersion: 2
