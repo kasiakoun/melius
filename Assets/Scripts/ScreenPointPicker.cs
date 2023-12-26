@@ -7,6 +7,7 @@ public class ScreenPointPicker : MonoBehaviour
 
     [SerializeField] private PositionPicker positionPicker;
     [SerializeField] private UnitPicker unitPicker;
+    [SerializeField] private ObjectPicker objectPicker;
 
     public void Start()
     {
@@ -16,6 +17,7 @@ public class ScreenPointPicker : MonoBehaviour
     private void OnMouseLeftClicked(Vector3 vector)
     {
         if (unitPicker.HandleLeftClick(vector)) return;
+        if (objectPicker.HandleLeftClick(vector)) return;
         if (positionPicker.HandleLeftClick(vector)) return;
     }
 }

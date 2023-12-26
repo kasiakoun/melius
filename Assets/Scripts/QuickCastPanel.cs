@@ -5,9 +5,10 @@ public class QuickCastPanel : MonoBehaviour
 {
     private const int MAX_QUICK_CASTS = 5;
 
-    // todo: replace unitPicker / positionPicker
+    // todo: replace unitPicker / positionPicker / objectPicker
     [SerializeField] private UnitPicker unitPicker;
     [SerializeField] private PositionPicker positionPicker;
+    [SerializeField] private ObjectPicker objectPicker;
 
     [SerializeField] private Transform quickCastPrefab;
     [SerializeField] private PlayerBattleUnit player;
@@ -30,6 +31,7 @@ public class QuickCastPanel : MonoBehaviour
 
         unitPicker.UnitsPicked += OnUnitsPicked;
         positionPicker.PositionPicked += OnPositionPicked;
+        objectPicker.ObjectPicked += OnObjectPicked;
     }
 
     private void ClearQuickCastPanel()
@@ -104,6 +106,11 @@ public class QuickCastPanel : MonoBehaviour
         var unitAction = unitActionFactory.CreateUnitAction(unitActionParameters);
 
         pickedActionsPanel.SetupPickedAction(unitAction);
+    }
+
+    private void OnObjectPicked(EnhancedObject obj)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void HidePanel() => quickCasts.ForEach(p => p.Hide());
