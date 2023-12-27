@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8412648461553251604}
   - component: {fileID: 2287028196850486224}
+  - component: {fileID: 6470293926778981730}
   m_Layer: 12
   m_Name: FlyingRock
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679fd45a63d10a447b15432bd0155c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitActionScriptableObject: {fileID: 11400000, guid: f9f7f7262ad89a840b166403b620d975, type: 2}
+--- !u!65 &6470293926778981730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412648461553251605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9, z: 1.27}
+  m_Center: {x: 0, y: -0.04, z: 0}
 --- !u!1 &8925376311983718560
 GameObject:
   m_ObjectHideFlags: 0

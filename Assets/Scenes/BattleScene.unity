@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitPicker: {fileID: 924474784}
   positionPicker: {fileID: 1146124696}
+  objectPicker: {fileID: 876481703}
   quickCastPrefab: {fileID: 8424984922634411090, guid: f4383425ffb8e2b4f86986b2f4cae723, type: 3}
   player: {fileID: 1668507031}
   pickedActionsPanel: {fileID: 1001784107}

@@ -110,7 +110,16 @@ public class QuickCastPanel : MonoBehaviour
 
     private void OnObjectPicked(EnhancedObject obj)
     {
-        throw new System.NotImplementedException();
+        var unitActionParameters = new UnitActionParameters(
+            obj.unitActionScriptableObject,
+            new List<object>
+            {
+                player,
+                obj,
+            });
+        var unitAction = unitActionFactory.CreateUnitAction(unitActionParameters);
+
+        pickedActionsPanel.SetupPickedAction(unitAction);
     }
 
     public void HidePanel() => quickCasts.ForEach(p => p.Hide());
