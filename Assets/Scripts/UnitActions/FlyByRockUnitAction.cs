@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 
 public class FlyByRockUnitAction : UnitAction
 {
@@ -16,6 +17,16 @@ public class FlyByRockUnitAction : UnitAction
 
     public override IEnumerator MakeAction()
     {
-        yield break;
+        if (unit is not IFlyingUnit flyingUnit)
+        {
+            Debug.LogError("IFlyingUnit is not implemented");
+            yield break;
+        }
+
+        yield return unit.Move(enhancedObject.transform.position);
+        enhancedObject.transform.parent = flyingUnit.BaseHolder;
+        enhancedObject.ActivateObject();
+        yield return flyingUnit.ActivateFlying();
+        enhancedObject.DeactivateObject();
     }
 }

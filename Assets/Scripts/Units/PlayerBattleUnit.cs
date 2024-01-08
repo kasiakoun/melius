@@ -10,7 +10,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
 [RequireComponent(typeof(UnitEquipment))]
-public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
+[RequireComponent(typeof(UnitFlying))]
+public class PlayerBattleUnit : MonoBehaviour, IBattleUnit, IFlyingUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
 
@@ -22,6 +23,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     private UnitRotation unitRotation;
     private UnitHealth unitHealth;
     private UnitEquipment unitEquipment;
+    private UnitFlying unitFlying;
     private WeaponScriptableObject weaponScriptableObject;
 
     private void Awake()
@@ -35,6 +37,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
         unitHealth = GetComponent<UnitHealth>();
         unitHealth.SetMaxHealth(scriptableObject.initialMaxHealth);
         unitEquipment = GetComponent<UnitEquipment>();
+        unitFlying = GetComponent<UnitFlying>();
 
         // todo: get weapon ScriptableObject from another place(inventory or something like this)
         weaponScriptableObject = Resources.Load<WeaponScriptableObject>("ScriptableObject/Weapons/Bow");
@@ -58,6 +61,13 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit
     public IEnumerator Attack(IBattleUnit targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
 
     public void SetHighlightOutline(bool enable) => outline.enabled = enable;
+
+    #endregion
+
+    #region IFlyingUnit Implementation
+
+    public Transform BaseHolder => unitFlying.BaseHolder;
+    public IEnumerator ActivateFlying() => unitFlying.ActivateObject();
 
     #endregion
 }

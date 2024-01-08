@@ -22,7 +22,7 @@ public class UnitMovement : MonoBehaviour
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(destination);
         yield return new WaitForSeconds(0.01f);
-        while (navMeshAgent.remainingDistance > stoppingDistance)
+        while (navMeshAgent.remainingDistance > 0.1)
         // todo: in the future we have to reload Move method with
         // todo: distance paramter to have more accurate position
         //while (navMeshAgent.hasPath)
