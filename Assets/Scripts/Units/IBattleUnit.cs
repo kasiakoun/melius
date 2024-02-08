@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public interface IBattleUnit
+public interface IBattleUnit : IEffectable
 {
     Vector3 Position { get; }
     Vector3 TargetPosition { get; }

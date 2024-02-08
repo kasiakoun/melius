@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,6 +10,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitMovement))]
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
+[RequireComponent(typeof(UnitEffects))]
 public class BattleUnit : MonoBehaviour, IBattleUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
@@ -20,6 +22,7 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
     private UnitMovement unitMovement;
     private UnitRotation unitRotation;
     private UnitHealth unitHealth;
+    private UnitEffects unitEffects;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
         unitRotation = GetComponent<UnitRotation>();
         unitHealth = GetComponent<UnitHealth>();
         unitHealth.SetMaxHealth(scriptableObject.initialMaxHealth);
+        unitEffects = GetComponent<UnitEffects>();
     }
 
     public bool IsWalking() => unitMovement.IsWalking;
@@ -50,6 +54,13 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
     public IEnumerator Attack(IBattleUnit targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
 
     public void SetHighlightOutline(bool enable) => outline.enabled = enable;
+
+    #endregion
+
+    #region IEffectable Implemenetation
+
+    public void ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
+    public void UpdateEffects() => unitEffects.UpdateEffects();
 
     #endregion
 }

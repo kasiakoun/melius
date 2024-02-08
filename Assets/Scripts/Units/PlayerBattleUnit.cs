@@ -11,6 +11,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitHealth))]
 [RequireComponent(typeof(UnitEquipment))]
 [RequireComponent(typeof(UnitFlying))]
+[RequireComponent(typeof(UnitEffects))]
 public class PlayerBattleUnit : MonoBehaviour, IBattleUnit, IFlyingUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
@@ -24,6 +25,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit, IFlyingUnit
     private UnitHealth unitHealth;
     private UnitEquipment unitEquipment;
     private UnitFlying unitFlying;
+    private UnitEffects unitEffects;
     private WeaponScriptableObject weaponScriptableObject;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit, IFlyingUnit
         unitHealth.SetMaxHealth(scriptableObject.initialMaxHealth);
         unitEquipment = GetComponent<UnitEquipment>();
         unitFlying = GetComponent<UnitFlying>();
+        unitEffects = GetComponent<UnitEffects>();
 
         // todo: get weapon ScriptableObject from another place(inventory or something like this)
         weaponScriptableObject = Resources.Load<WeaponScriptableObject>("ScriptableObject/Weapons/Bow");
@@ -68,6 +71,13 @@ public class PlayerBattleUnit : MonoBehaviour, IBattleUnit, IFlyingUnit
 
     public Transform BaseHolder => unitFlying.BaseHolder;
     public IEnumerator ActivateFlying() => unitFlying.ActivateObject();
+
+    #endregion
+
+    #region IEffectable Implemenetation
+
+    public void ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
+    public void UpdateEffects() => unitEffects.UpdateEffects();
 
     #endregion
 }
