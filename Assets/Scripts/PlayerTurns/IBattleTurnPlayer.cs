@@ -3,6 +3,6 @@ using UnityEngine.UI;
 public interface IBattleTurnPlayer
 {
     bool UnitIsDead { get; }
-    IBattleUnit BattleUnit { get; }
+    BattleUnitBase BattleUnit { get; }
     void MakeTurn();
 }

@@ -26,7 +26,7 @@ public class ComputerBattlePlayer : MonoBehaviour, IBattleTurnPlayer
     #region IBattlePlayerTurn Implementation
 
     public bool UnitIsDead { get; private set; }
-    public IBattleUnit BattleUnit => battleUnit;
+    public BattleUnitBase BattleUnit => battleUnit;
 
     public void MakeTurn()
     {

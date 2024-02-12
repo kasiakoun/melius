@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PickedUnitsEventArgs : EventArgs
 {
-    public List<IBattleUnit> PickedUnits { get; set; }
+    public List<BattleUnitBase> PickedUnits { get; set; }
 }
 
 public class UnitPicker : MonoBehaviour
 {
     [SerializeField] private LayerMask unitLayerMask;
 
-    private List<IBattleUnit> battleUnits;
+    private List<BattleUnitBase> battleUnits;
 
     private bool isPicking;
 
@@ -21,7 +21,7 @@ public class UnitPicker : MonoBehaviour
     public void Start()
     {
         var battleUnits = FindObjectsByType<BattleUnit>(FindObjectsSortMode.None);
-        this.battleUnits = battleUnits.Cast<IBattleUnit>().ToList();
+        this.battleUnits = battleUnits.Cast<BattleUnitBase>().ToList();
     }
 
     public bool HandleLeftClick(Vector3 vector)
@@ -34,14 +34,14 @@ public class UnitPicker : MonoBehaviour
 
         UnitsPicked?.Invoke(new PickedUnitsEventArgs()
         {
-            PickedUnits = new List<IBattleUnit> { battleUnit }
+            PickedUnits = new List<BattleUnitBase> { battleUnit }
         });
         StopPicking();
 
         return true;
     }
 
-    private IBattleUnit GetBattleUnitByRay(Ray ray)
+    private BattleUnitBase GetBattleUnitByRay(Ray ray)
     {
         var maxDistance = 1000f;
         if (!Physics.Raycast(ray, out RaycastHit raycastHit, maxDistance, unitLayerMask))

@@ -2,14 +2,14 @@ using System.Collections;
 
 public class AttackUnitAction : UnitAction
 {
-    private IBattleUnit owner;
-    private IBattleUnit target;
+    private BattleUnitBase owner;
+    private BattleUnitBase target;
 
-    public IBattleUnit TargetUnit => target;
+    public BattleUnitBase TargetUnit => target;
 
     public AttackUnitAction(UnitActionScriptableObject scriptableObject,
-        IBattleUnit owner,
-        IBattleUnit target)
+        BattleUnitBase owner,
+        BattleUnitBase target)
         : base(scriptableObject)
     {
         this.owner = owner;

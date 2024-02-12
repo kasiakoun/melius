@@ -11,7 +11,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
 [RequireComponent(typeof(UnitEffects))]
-public class BattleUnit : MonoBehaviour, IBattleUnit
+public class BattleUnit : BattleUnitBase
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
 
@@ -41,19 +41,19 @@ public class BattleUnit : MonoBehaviour, IBattleUnit
 
     #region IBattleUnit Implementation
 
-    public Vector3 Position => transform.position;
-    public Vector3 TargetPosition => unitDamageable.Target.position;
-    public UnitScriptableObject ScriptableObject => scriptableObject;
+    public override Vector3 Position => transform.position;
+    public override Vector3 TargetPosition => unitDamageable.Target.position;
+    public override UnitScriptableObject ScriptableObject => scriptableObject;
 
-    public IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);
+    public override IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);
 
-    public IEnumerator Rotate(Vector3 position) => unitRotation.Rotate(position);
+    public override IEnumerator Rotate(Vector3 position) => unitRotation.Rotate(position);
 
-    public void TakeDamage() => unitDamageable.TakeDamage();
+    public override void TakeDamage() => unitDamageable.TakeDamage();
 
-    public IEnumerator Attack(IBattleUnit targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
+    public override IEnumerator Attack(BattleUnitBase targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
 
-    public void SetHighlightOutline(bool enable) => outline.enabled = enable;
+    public override void SetHighlightOutline(bool enable) => outline.enabled = enable;
 
     #endregion
 

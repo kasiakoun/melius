@@ -11,7 +11,7 @@ public class BowBehavior : WeaponBehavior<Bow>
     [SerializeField] private float arrowRotationSpeed = 3f;
     [SerializeField] private float waitSecondsToShot = 0.45f;
 
-    public override IEnumerator Attack(Weapon weapon, IBattleUnit targetBattleUnit)
+    public override IEnumerator Attack(Weapon weapon, BattleUnitBase targetBattleUnit)
     {
         //yield return new WaitForSeconds(2);
         var bow = weapon as Bow;

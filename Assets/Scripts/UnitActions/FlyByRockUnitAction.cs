@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class FlyByRockUnitAction : UnitAction
 {
-    private readonly IBattleUnit unit;
+    private readonly BattleUnitBase unit;
     private readonly EnhancedObject enhancedObject;
 
     public FlyByRockUnitAction(UnitActionScriptableObject scriptableObject,
-        IBattleUnit unit,
+        BattleUnitBase unit,
         EnhancedObject enhancedObject)
         : base(scriptableObject)
     {

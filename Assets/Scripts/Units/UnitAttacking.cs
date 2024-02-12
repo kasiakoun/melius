@@ -13,7 +13,7 @@ public class UnitAttacking : MonoBehaviour
         unitEquipment = GetComponent<UnitEquipment>();
     }
 
-    public IEnumerator Attack(IBattleUnit targetBattleUnit)
+    public IEnumerator Attack(BattleUnitBase targetBattleUnit)
     {
         var weapon = unitEquipment?.Weapon;
         var weaponBehavior = weaponBehaviors.FirstOrDefault(p => p.IsWeaponType(weapon));

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class MoveUnitAction : UnitAction
 {
-    private IBattleUnit owner;
+    private BattleUnitBase owner;
     private Vector3 targetPosition;
 
     public MoveUnitAction(UnitActionScriptableObject scriptableObject,
-        IBattleUnit owner,
+        BattleUnitBase owner,
         Vector3 targetPosition)
         : base(scriptableObject)
     {

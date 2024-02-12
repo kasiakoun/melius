@@ -4,5 +4,5 @@ using UnityEngine;
 public abstract class UnitStatusEffectSO : ScriptableObject
 {
     [SerializeField] public int Duration { get; private set; }
-    public abstract void ApplyEffect(IBattleUnit unit);
+    public abstract void ApplyEffect(BattleUnitBase unit);
 }
