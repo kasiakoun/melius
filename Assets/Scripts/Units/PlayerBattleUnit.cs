@@ -70,14 +70,15 @@ public class PlayerBattleUnit : BattleUnitBase, IFlyingUnit
     #region IFlyingUnit Implementation
 
     public Transform BaseHolder => unitFlying.BaseHolder;
+    public bool IsFlying => unitFlying.IsFlying;
     public IEnumerator ActivateFlying() => unitFlying.ActivateObject();
+    public IEnumerator DeactivateFlying() => unitFlying.DeactivateObject();
 
     #endregion
 
     #region IEffectable Implemenetation
 
-    public void ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
-    public void UpdateEffects() => unitEffects.UpdateEffects();
+    public override IEnumerator ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
 
     #endregion
 }

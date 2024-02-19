@@ -59,8 +59,7 @@ public class BattleUnit : BattleUnitBase
 
     #region IEffectable Implemenetation
 
-    public void ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
-    public void UpdateEffects() => unitEffects.UpdateEffects();
+    public override IEnumerator ApplyEffect(UnitStatusEffectSO effect) => unitEffects.ApplyEffect(effect);
 
     #endregion
 }

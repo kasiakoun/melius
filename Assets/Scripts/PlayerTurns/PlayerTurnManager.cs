@@ -19,6 +19,7 @@ public class PlayerTurnManager : PlayerTurnStateMachine
 
     public event Action<List<BattlePlayerTurn>> PlayerTurnsChanged;
     public event Action<BattlePlayerTurn> TurnChanged;
+    public event Action RoundChanged;
 
     private void Awake()
     {
@@ -67,6 +68,8 @@ public class PlayerTurnManager : PlayerTurnStateMachine
     {
         if (currentRandomBattlePlayerTurns != null &&
             !currentRandomBattlePlayerTurns.All(p => p.TurnIsOver)) return;
+
+        RoundChanged?.Invoke();
 
         currentRandomBattlePlayerTurns = nextRandomBattlePlayerTurns ?? CreateRandomBattlePlayerTurns();
         nextRandomBattlePlayerTurns = CreateRandomBattlePlayerTurns();

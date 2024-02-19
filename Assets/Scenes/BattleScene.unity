@@ -226,6 +226,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 229007873812025133, guid: 7c97d4b7ea23ac14eb2ad21a192944d9, type: 3}
+      propertyPath: playerTurnManager
+      value: 
+      objectReference: {fileID: 294888599}
     - target: {fileID: 8897376132759158158, guid: 7c97d4b7ea23ac14eb2ad21a192944d9, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2286,6 +2290,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7609558396268358612, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
+      propertyPath: playerTurnManager
+      value: 
+      objectReference: {fileID: 294888599}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df0536855e8c684e9204ec860baab88, type: 3}
 --- !u!1001 &3832574375726878668

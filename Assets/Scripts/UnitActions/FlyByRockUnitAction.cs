@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
-public class FlyByRockUnitAction : UnitAction
+public class FlyByRockUnitAction : UnitActionWithStatusEffect<FlyingRockUnitStatusEffectSO>
 {
     private readonly BattleUnitBase unit;
     private readonly EnhancedObject enhancedObject;
@@ -26,7 +27,7 @@ public class FlyByRockUnitAction : UnitAction
         yield return unit.Move(enhancedObject.transform.position);
         enhancedObject.transform.parent = flyingUnit.BaseHolder;
         enhancedObject.ActivateObject();
-        yield return flyingUnit.ActivateFlying();
+        yield return unit.ApplyEffect(UnitStatusEffectSO);
         enhancedObject.DeactivateObject();
     }
 }

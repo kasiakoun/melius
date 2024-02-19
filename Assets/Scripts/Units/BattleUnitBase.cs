@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class BattleUnitBase : MonoBehaviour
+public abstract class BattleUnitBase : MonoBehaviour, IEffectable
 {
     public abstract Vector3 Position { get; }
     public abstract Vector3 TargetPosition { get; }
@@ -11,4 +11,5 @@ public abstract class BattleUnitBase : MonoBehaviour
     public abstract void TakeDamage();
     public abstract IEnumerator Attack(BattleUnitBase targetBattleUnit);
     public abstract void SetHighlightOutline(bool enable);
+    public abstract IEnumerator ApplyEffect(UnitStatusEffectSO effect);
 }

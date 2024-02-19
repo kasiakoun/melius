@@ -8,16 +8,18 @@ public class UnitFlying : MonoBehaviour
     [SerializeField] private Transform baseHolder;
     private NavMeshAgent navMeshAgent;
 
-    private float moveSpeed = 5f;
+    private float moveSpeed = 3f;
     private float targetHeight = 4f;
 
     private float levitateHeight = 0.33f;
-    private float levitateSpeed = 2f;
+    private float levitateSpeed = 3f;
 
     private bool levitatedIsStarted;
     private float startBaseOffset;
 
     public Transform BaseHolder => baseHolder;
+
+    public bool IsFlying { get; private set; }
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class UnitFlying : MonoBehaviour
 
     public IEnumerator ActivateObject()
     {
+        IsFlying = true;
         var currentBaseOffset = navMeshAgent.baseOffset;
 
         while (currentBaseOffset < targetHeight)
@@ -48,5 +51,21 @@ public class UnitFlying : MonoBehaviour
 
         startBaseOffset = navMeshAgent.baseOffset;
         levitatedIsStarted = true;
+    }
+
+    public IEnumerator DeactivateObject()
+    {
+        IsFlying = false;
+        levitatedIsStarted = false;
+        var currentBaseOffset = navMeshAgent.baseOffset;
+
+        while (currentBaseOffset > 0)
+        {
+            Debug.Log($"ActivateObject: {currentBaseOffset}");
+            var nextPosition = currentBaseOffset - moveSpeed * Time.deltaTime;
+            navMeshAgent.baseOffset = nextPosition;
+            currentBaseOffset = navMeshAgent.baseOffset;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
