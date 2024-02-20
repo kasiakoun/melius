@@ -52,6 +52,7 @@ public class BattleUnit : BattleUnitBase
     public override void TakeDamage() => unitDamageable.TakeDamage();
 
     public override IEnumerator Attack(BattleUnitBase targetBattleUnit) => unitAttacking.Attack(targetBattleUnit);
+    public override bool IsMelee() => unitAttacking.IsMelee();
 
     public override void SetHighlightOutline(bool enable) => outline.enabled = enable;
 

@@ -17,6 +17,8 @@ public class UnitFlying : MonoBehaviour
     private bool levitatedIsStarted;
     private float startBaseOffset;
 
+    private float initialBaseOffset;
+
     public Transform BaseHolder => baseHolder;
 
     public bool IsFlying { get; private set; }
@@ -24,6 +26,7 @@ public class UnitFlying : MonoBehaviour
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        initialBaseOffset = navMeshAgent.baseOffset;
     }
 
     private void Update()
@@ -59,7 +62,7 @@ public class UnitFlying : MonoBehaviour
         levitatedIsStarted = false;
         var currentBaseOffset = navMeshAgent.baseOffset;
 
-        while (currentBaseOffset > 0)
+        while (currentBaseOffset > initialBaseOffset)
         {
             Debug.Log($"ActivateObject: {currentBaseOffset}");
             var nextPosition = currentBaseOffset - moveSpeed * Time.deltaTime;
@@ -67,5 +70,7 @@ public class UnitFlying : MonoBehaviour
             currentBaseOffset = navMeshAgent.baseOffset;
             yield return new WaitForEndOfFrame();
         }
+
+        navMeshAgent.baseOffset = initialBaseOffset;
     }
 }

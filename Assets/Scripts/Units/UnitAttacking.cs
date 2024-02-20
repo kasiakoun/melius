@@ -15,13 +15,29 @@ public class UnitAttacking : MonoBehaviour
 
     public IEnumerator Attack(BattleUnitBase targetBattleUnit)
     {
+        var weaponBehavior = GetWeaponBehavior();
+        if (weaponBehavior == null) yield break;
+
+        yield return weaponBehavior.Attack(unitEquipment?.Weapon, targetBattleUnit);
+    }
+
+    public bool IsMelee()
+    {
+        var weaponBehavior = GetWeaponBehavior();
+
+        return weaponBehavior == null || weaponBehavior.IsMelee;
+    }
+
+    private WeaponBehavior GetWeaponBehavior()
+    {
         var weapon = unitEquipment?.Weapon;
         var weaponBehavior = weaponBehaviors.FirstOrDefault(p => p.IsWeaponType(weapon));
         if (weaponBehavior == null)
         {
             Debug.LogError($"weaponBehavior was not found in collection for '{weapon}' weapon");
-            yield break;
+            return null;
         }
-        yield return weaponBehavior.Attack(weapon, targetBattleUnit);
+
+        return weaponBehavior;
     }
 }
