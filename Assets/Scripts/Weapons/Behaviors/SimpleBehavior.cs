@@ -7,6 +7,8 @@ public class SimpleBehavior : WeaponBehavior
     [SerializeField] private BaseUnitAnimator unitAnimator;
     [SerializeField] private float delayBeforeHit;
 
+    public override bool IsMelee => true;
+
     public override IEnumerator Attack(Weapon weapon, BattleUnitBase targetBattleUnit)
     {
         unitAnimator.SimpleAttack();

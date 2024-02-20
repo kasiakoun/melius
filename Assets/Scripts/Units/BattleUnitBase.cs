@@ -10,6 +10,7 @@ public abstract class BattleUnitBase : MonoBehaviour, IEffectable
     public abstract IEnumerator Rotate(Vector3 unit);
     public abstract void TakeDamage();
     public abstract IEnumerator Attack(BattleUnitBase targetBattleUnit);
+    public abstract bool IsMelee();
     public abstract void SetHighlightOutline(bool enable);
     public abstract IEnumerator ApplyEffect(UnitStatusEffectSO effect);
 }

@@ -18,8 +18,10 @@ public class AttackUnitAction : UnitAction
 
     public override IEnumerator MakeAction()
     {
-        // todo: should we move / rotate when attacks is melee / range
-        //yield return owner.Move(target.Position);
+        if (owner.IsMelee())
+        {
+            yield return owner.Move(target.Position);
+        }
         yield return owner.Rotate(target.Position);
         yield return owner.Attack(target);
         target.TakeDamage();
