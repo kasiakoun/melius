@@ -54,8 +54,9 @@ public class PlayerBattleUnit : BattleUnitBase, IFlyingUnit
     public override Vector3 Position => transform.position;
     public override Vector3 TargetPosition => unitDamageable.Target.position;
     public override UnitScriptableObject ScriptableObject => scriptableObject;
-    
-    public override IEnumerator Move(Vector3 destination) => unitMovement.Move(destination);
+    public override float StopDistanceToAttack => unitMovement.StopDistance;
+    public override IEnumerator Move(Vector3 destination, float stopDistance = 1.0f) =>
+        unitMovement.Move(destination, stopDistance);
 
     public override IEnumerator Rotate(Vector3 position) => unitRotation.Rotate(position);
 

@@ -5,10 +5,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitMovement : MonoBehaviour
 {
-    [SerializeField] private float stoppingDistance;
+    [SerializeField] public float stopDistance;
 
     private NavMeshAgent navMeshAgent;
 
+    public float StopDistance => stopDistance;
     public bool IsWalking { get; private set; }
 
     private void Awake()
@@ -16,17 +17,16 @@ public class UnitMovement : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public IEnumerator Move(Vector3 destination)
+    public IEnumerator Move(Vector3 destination, float stopDistance)
     {
         IsWalking = true;
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(destination);
         yield return new WaitForSeconds(0.01f);
-        while (navMeshAgent.remainingDistance > 0.1)
-        // todo: in the future we have to reload Move method with
-        // todo: distance paramter to have more accurate position
+        while (navMeshAgent.remainingDistance > stopDistance)
         //while (navMeshAgent.hasPath)
         {
+            Debug.Log($"Move: {navMeshAgent.remainingDistance}");
             yield return new WaitForFixedUpdate();
         }
 
