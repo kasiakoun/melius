@@ -20,7 +20,7 @@ public class AttackUnitAction : UnitAction
     {
         if (owner.IsMelee())
         {
-            yield return owner.Move(target.Position);
+            yield return owner.Move(target.Position, owner.StopDistanceToAttack);
         }
         yield return owner.Rotate(target.Position);
         yield return owner.Attack(target);

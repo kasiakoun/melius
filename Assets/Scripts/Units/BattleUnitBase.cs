@@ -6,7 +6,8 @@ public abstract class BattleUnitBase : MonoBehaviour, IEffectable
     public abstract Vector3 Position { get; }
     public abstract Vector3 TargetPosition { get; }
     public abstract UnitScriptableObject ScriptableObject { get; }
-    public abstract IEnumerator Move(Vector3 destination);
+    public abstract float StopDistanceToAttack { get; }
+    public abstract IEnumerator Move(Vector3 destination, float stopDistance = 1.0f);
     public abstract IEnumerator Rotate(Vector3 unit);
     public abstract void TakeDamage();
     public abstract IEnumerator Attack(BattleUnitBase targetBattleUnit);

@@ -37,7 +37,8 @@ public class ComputerBattlePlayer : MonoBehaviour, IBattleTurnPlayer
         var attackActionScriptableObject =
             unitActionScriptableObjects.FirstOrDefault(p => p.unityActionType.StoredType.Name == "AttackUnitAction");
 
-        var enemyTarget = Resources.FindObjectsOfTypeAll<PlayerBattleUnit>()[0];
+        var test = Object.FindObjectsByType<PlayerBattleUnit>(FindObjectsSortMode.None);
+        var enemyTarget = test[0];
 
         var attackAction = new AttackUnitAction(attackActionScriptableObject, battleUnit, enemyTarget);
         battleHandler.Handle(this, new List<IUnitAction> { attackAction });
