@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class EnhancedObject : MonoBehaviour
 {
-    [SerializeField] public UnitActionScriptableObject unitActionScriptableObject;
+    [SerializeField] public UnitActionComposite unitActionComposite;
     public abstract void ActivateObject();
     public abstract void DeactivateObject();
 }

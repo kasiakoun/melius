@@ -6,22 +6,22 @@ using UnityEngine.UI;
 
 public class QuickCast : MonoBehaviour
 {
-    [SerializeField] private UnitActionScriptableObject unitActionScriptableObject;
+    [SerializeField] private UnitActionComposite unitActionComposite;
     [SerializeField] private Image actionImage;
 
     private Button button;
 
-    public event Action<UnitActionScriptableObject> ButtonClicked;
+    public event Action<UnitActionComposite> ButtonClicked;
 
-    public UnitActionScriptableObject UnitActionScriptableObject
+    public UnitActionComposite UnitActionComposite
     {
-        get => unitActionScriptableObject;
+        get => unitActionComposite;
         set
         {
-            unitActionScriptableObject = value;
+            unitActionComposite = value;
             if (value != null)
             {
-                actionImage.sprite = value.icon;
+                actionImage.sprite = value.scriptableObject.icon;
                 actionImage.enabled = true;
             }
             else
@@ -40,9 +40,9 @@ public class QuickCast : MonoBehaviour
 
     private void OnClick()
     {
-        if (unitActionScriptableObject == null) return;
+        if (unitActionComposite == null) return;
 
-        ButtonClicked?.Invoke(unitActionScriptableObject);
+        ButtonClicked?.Invoke(unitActionComposite);
     }
 
     public void Hide() => gameObject.SetActive(false);
