@@ -67,17 +67,8 @@ public class QuickCastPanel : MonoBehaviour
 
     private void OnQuickCastClicked(UnitActionComposite unitActionComposite)
     {
-        //// todo: replace with something universal(unitPicker / positionPicker)
         lastClickedUnitActionComposite = unitActionComposite;
-        //var unitActionType = scriptableObject.unityActionType.StoredType;
-        //if (unitActionType == typeof(AttackUnitAction))
-        //{
-        //unitPicker.StartPicking();
-        //}
-        //else if (unitActionType == typeof(MoveUnitAction))
-        //{
-        positionPicker.StartPicking();
-        //}
+        unitActionComposite.picker.StartPicking();
     }
 
     private void OnPositionPicked(Vector3 obj)

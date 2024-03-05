@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PositionPicker : MonoBehaviour
+public class PositionPicker : WaitingPicker
 {
     [SerializeField] private Terrain terrain;
     [SerializeField] private LayerMask terrainLayerMask;
@@ -36,7 +36,7 @@ public class PositionPicker : MonoBehaviour
         return raycastHit.point;
     }
 
-    public void StartPicking()
+    public override void StartPicking()
     {
         isPicking = true;
     }

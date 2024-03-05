@@ -8,7 +8,7 @@ public class PickedUnitsEventArgs : EventArgs
     public List<BattleUnitBase> PickedUnits { get; set; }
 }
 
-public class UnitPicker : MonoBehaviour
+public class UnitPicker : WaitingPicker
 {
     [SerializeField] private LayerMask unitLayerMask;
 
@@ -52,7 +52,7 @@ public class UnitPicker : MonoBehaviour
         return raycastHit.transform.GetComponent<BattleUnit>();
     }
 
-    public void StartPicking()
+    public override void StartPicking()
     {
         isPicking = true;
         foreach (var battleUnit in battleUnits)

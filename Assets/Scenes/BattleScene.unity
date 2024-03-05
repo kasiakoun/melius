@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 876481702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c83e3a83c12fd404b8edb85429efaeba, type: 3}
+  m_Script: {fileID: 11500000, guid: 1861cccc0c4680b4da9cb58e1ec7701e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectLayerMask:
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 924474783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb634a881765754084a0b7296aa8936, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a3c72d7e16172543ace500300c334f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitLayerMask:
@@ -1329,6 +1329,7 @@ MonoBehaviour:
   factory: {fileID: 1635946702}
   validator: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: f9f7f7262ad89a840b166403b620d975, type: 2}
+  picker: {fileID: 0}
 --- !u!1 &998733090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,7 +1614,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1146124695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f38c1821f61b94393d79eae60c90ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 61b92b6508bbb0c4cb856d9b20997bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 173920191}
@@ -1930,6 +1931,7 @@ MonoBehaviour:
   factory: {fileID: 2138301561}
   validator: {fileID: 1399025651}
   scriptableObject: {fileID: 11400000, guid: 8b6145e815043894c940c5222be7ddb4, type: 2}
+  picker: {fileID: 924474784}
 --- !u!1 &1635946700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,6 +2547,7 @@ MonoBehaviour:
   factory: {fileID: 1697801600}
   validator: {fileID: 0}
   scriptableObject: {fileID: 11400000, guid: 39163fc030600a2479447f810ce34c0d, type: 2}
+  picker: {fileID: 1146124696}
 --- !u!1 &2064834523
 GameObject:
   m_ObjectHideFlags: 0
