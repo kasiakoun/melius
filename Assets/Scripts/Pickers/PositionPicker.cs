@@ -36,7 +36,7 @@ public class PositionPicker : WaitingPicker
         return raycastHit.point;
     }
 
-    public override void StartPicking()
+    public override void StartPicking(UnitActionValidator validator, BattleUnitBase battleUnit)
     {
         isPicking = true;
     }

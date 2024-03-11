@@ -68,7 +68,7 @@ public class QuickCastPanel : MonoBehaviour
     private void OnQuickCastClicked(UnitActionComposite unitActionComposite)
     {
         lastClickedUnitActionComposite = unitActionComposite;
-        unitActionComposite.picker.StartPicking();
+        unitActionComposite.picker.StartPicking(unitActionComposite.validator, player);
     }
 
     private void OnPositionPicked(Vector3 obj)

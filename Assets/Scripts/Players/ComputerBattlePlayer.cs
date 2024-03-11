@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,14 +39,25 @@ public class ComputerBattlePlayer : MonoBehaviour, IBattleTurnPlayer
         var test = Object.FindObjectsByType<PlayerBattleUnit>(FindObjectsSortMode.None);
         var enemyTarget = test[0];
 
+        var unitActions = new List<IUnitAction>();
         var unitActionParameters = new UnitActionParameters.UnitActionParametersBuilder()
             .SetScriptableObject(attackUnitActionComposite.scriptableObject)
             .SetOwner(battleUnit)
             .SetTarget(enemyTarget)
             .Build();
-        var attackUnitAction = attackUnitActionComposite.factory.CreateUnitAction(unitActionParameters);
+        if (attackUnitActionComposite.validator.CanAction(unitActionParameters))
+        {
+            unitActions.Add(attackUnitActionComposite.factory.CreateUnitAction(unitActionParameters));
+        }
 
-        battleHandler.Handle(this, new List<IUnitAction> { attackUnitAction });
+        //battleHandler.Handle(this, unitActions);
+        StartCoroutine(HandleActions(unitActions));
+    }
+
+    public IEnumerator HandleActions(List<IUnitAction> unitActions)
+    {
+        yield return new WaitForSeconds(0.5f);
+        battleHandler.Handle(this, unitActions);
     }
 
     #endregion

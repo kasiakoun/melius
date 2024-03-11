@@ -15,6 +15,8 @@ public class UnitPicker : WaitingPicker
     private List<BattleUnitBase> battleUnits;
 
     private bool isPicking;
+    private UnitActionValidator pickedActionValidator;
+    private BattleUnitBase pickedBattleUnit;
 
     public event Action<PickedUnitsEventArgs> UnitsPicked;
 
@@ -31,6 +33,12 @@ public class UnitPicker : WaitingPicker
         var ray = Camera.main.ScreenPointToRay(vector);
         var battleUnit = GetBattleUnitByRay(ray);
         if (battleUnit == null) return false;
+
+        var unitActionParameters = new UnitActionParameters.UnitActionParametersBuilder()
+            .SetOwner(pickedBattleUnit)
+            .SetTarget(battleUnit)
+            .Build();
+        if (!pickedActionValidator.CanAction(unitActionParameters)) return false;
 
         UnitsPicked?.Invoke(new PickedUnitsEventArgs()
         {
@@ -52,11 +60,19 @@ public class UnitPicker : WaitingPicker
         return raycastHit.transform.GetComponent<BattleUnit>();
     }
 
-    public override void StartPicking()
+    public override void StartPicking(UnitActionValidator validator, BattleUnitBase pickerBattleUnit)
     {
         isPicking = true;
+        pickedActionValidator = validator;
+        pickedBattleUnit = pickerBattleUnit;
         foreach (var battleUnit in battleUnits)
         {
+            var unitActionParameters = new UnitActionParameters.UnitActionParametersBuilder()
+                .SetOwner(pickedBattleUnit)
+                .SetTarget(battleUnit)
+                .Build();
+            if (!validator.CanAction(unitActionParameters)) continue;
+
             battleUnit.SetHighlightOutline(true);
         }
     }
@@ -68,5 +84,7 @@ public class UnitPicker : WaitingPicker
         {
             battleUnit.SetHighlightOutline(false);
         }
+        pickedActionValidator = null;
+        pickedBattleUnit = null;
     }
 }

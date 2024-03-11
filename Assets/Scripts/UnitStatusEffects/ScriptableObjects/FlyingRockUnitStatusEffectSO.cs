@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class FlyingRockUnitStatusEffectSO : UnitStatusEffectSO
 {
+    public override int Duration => 1;
+
     public override IEnumerator ApplyEffect(BattleUnitBase unit)
     {
         Debug.Log("Effect was added");
