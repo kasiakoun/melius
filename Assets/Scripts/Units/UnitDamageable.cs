@@ -6,18 +6,22 @@ public class UnitDamageable : MonoBehaviour
     [SerializeField] private BaseUnitAnimator animator;
     [SerializeField] private Transform target;
     private UnitHealth unitHealth;
+    private UnitDamageText unitDamageText;
 
     public Transform Target => target;
 
     private void Awake()
     {
         unitHealth = GetComponent<UnitHealth>();
+        unitDamageText = GetComponent<UnitDamageText>();
     }
 
     public void TakeDamage()
     {
         animator.TakeDamage();
         // todo: replace with dynamic damage
-        unitHealth.Damage(5);
+        var damageValue = 5;
+        unitHealth.Damage(damageValue);
+        unitDamageText.Show(damageValue);
     }
 }

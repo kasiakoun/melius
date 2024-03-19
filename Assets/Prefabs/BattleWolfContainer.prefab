@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 6804957640156460966}
   - component: {fileID: 1034961561364643790}
   - component: {fileID: 229007873812025133}
+  - component: {fileID: 5502883847305047284}
   m_Layer: 10
   m_Name: BattleWolf
   m_TagString: Untagged
@@ -89,6 +90,7 @@ Transform:
   - {fileID: 8897376131696362347}
   - {fileID: 8897376131694734432}
   - {fileID: 8345903194085827173}
+  - {fileID: 8396085829877735903}
   m_Father: {fileID: 8897376132759158158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -252,6 +254,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurnManager: {fileID: 0}
+--- !u!114 &5502883847305047284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007589572138782008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de055188596570a40b071a72ae8ca89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePopupPrefab: {fileID: 321430974931747242, guid: 80fe798fafdf06a489b94113b29838ea, type: 3}
+  damagePopupHolder: {fileID: 8396085829877735903}
 --- !u!1 &4138087978155959283
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +298,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2007589572138782011}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5388145315682475393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8396085829877735903}
+  m_Layer: 10
+  m_Name: UnderHeadHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8396085829877735903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388145315682475393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.609, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2007589572138782011}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6681850952234145334
 GameObject:

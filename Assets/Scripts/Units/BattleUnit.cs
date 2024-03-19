@@ -11,6 +11,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitRotation))]
 [RequireComponent(typeof(UnitHealth))]
 [RequireComponent(typeof(UnitEffects))]
+[RequireComponent(typeof(UnitDamageText))]
 public class BattleUnit : BattleUnitBase
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
