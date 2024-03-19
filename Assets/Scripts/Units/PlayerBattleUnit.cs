@@ -12,6 +12,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnitEquipment))]
 [RequireComponent(typeof(UnitFlying))]
 [RequireComponent(typeof(UnitEffects))]
+[RequireComponent(typeof(UnitDamageText))]
 public class PlayerBattleUnit : BattleUnitBase, IFlyingUnit
 {
     [SerializeField] private UnitScriptableObject scriptableObject;
